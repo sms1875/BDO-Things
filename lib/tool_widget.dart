@@ -1,5 +1,5 @@
+import 'package:bdo_things/tool_data.dart';
 import 'package:flutter/material.dart';
-import 'tool_detail_page.dart';
 
 class ToolWidget extends StatelessWidget {
   final String toolName, toolImage;
@@ -14,15 +14,25 @@ class ToolWidget extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ToolDetailPage(
-              toolName: toolName,
-              toolImage: toolImage,
-            ),
+            builder: (context) => getPage(toolName),
           ),
         );
       },
       child: buildToolWidget(),
     );
+  }
+
+  Widget getPageWidget(String pageName) {
+    return pageMap[pageName]?.call() ?? pageMap['default']!.call();
+  }
+
+  Widget getPage(String toolName) {
+    for (var tool in toolsData) {
+      if (tool['name'] == toolName) {
+        return getPageWidget(tool['page']!);
+      }
+    }
+    return pageMap['default']!.call();
   }
 
   Widget buildToolWidget() {
