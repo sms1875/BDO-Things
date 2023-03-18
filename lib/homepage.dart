@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'custom_app_bar.dart';
 import 'tool_widget.dart';
+import 'tool_data.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,24 +10,23 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(),
-      body: HomePageBody(),
+      body: HomePageBody(toolsData: toolsData),
     );
   }
 }
 
 class HomePageBody extends StatelessWidget {
-  const HomePageBody({Key? key}) : super(key: key);
+  final List<Map<String, String>> toolsData;
 
-  List<Widget> buildToolWidgets() {
-    return [
-      ToolWidget( toolName: '가공무역 계산기', toolImage: 'ProcessingTrade'),
-      ToolWidget( toolName: '예비1', toolImage: 'ProcessingTrade' ),
-      ToolWidget( toolName: '예비2', toolImage: 'ProcessingTrade' ),
-      ToolWidget( toolName: '예비3', toolImage: 'ProcessingTrade' ),
-      ToolWidget( toolName: '예비4', toolImage: 'ProcessingTrade' ),
-      ToolWidget( toolName: '예비5', toolImage: 'ProcessingTrade' ),
-      ToolWidget( toolName: '예비6', toolImage: 'ProcessingTrade' ),
-    ];
+  HomePageBody({Key? key, required this.toolsData}) : super(key: key);
+
+  List<Widget> buildToolWidgets(List<Map<String, String>> toolsData) {
+    return toolsData
+        .map((toolData) => ToolWidget(
+      toolName: toolData['name']!,
+      toolImage: toolData['image']!,
+    ))
+        .toList();
   }
 
   @override
@@ -38,7 +38,7 @@ class HomePageBody extends StatelessWidget {
         child: Wrap(
           spacing: 16.0,
           runSpacing: 16.0,
-          children: buildToolWidgets(),
+          children: buildToolWidgets(toolsData),
         ),
       ),
     );
