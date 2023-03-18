@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(const MyApp());
@@ -6,120 +7,223 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        home: Scaffold(
+          body: ListView(
+            children: [
+              HomepagedesktopWidget(),
+            ],
+          ),
+        )
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class HomepagedesktopWidget extends StatelessWidget {
+  const HomepagedesktopWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
+    // Figma Flutter Generator HomepagedesktopWidget - FRAME
+    return Container(
+        width: 1506,
+        height: 3106,
+        decoration: BoxDecoration(
+          color : Color.fromRGBO(39, 39, 39, 1),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: Stack(
+            children: <Widget>[
+              Positioned(
+                  top: 0,
+                  left: 0,
+                  child: Container(
+                      width: 1506,
+                      height: 160,
+                      decoration: BoxDecoration(
+
+                      ),
+                      child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                    width: 1440,
+                                    height: 160,
+                                    decoration: BoxDecoration(
+                                      color : Color.fromRGBO(196, 196, 196, 1),
+                                    )
+                                )
+                            ),Positioned(
+                                top: 52,
+                                left: 151,
+                                child: Text('검은사막 도구', textAlign: TextAlign.left, style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 24,
+                                    letterSpacing: 0.5,
+                                    fontWeight: FontWeight.normal,
+                                    height: 1.25
+                                ),)
+                            ),Positioned(
+                                top: 16,
+                                left: 668,
+                                child: Container(
+                                  decoration: BoxDecoration(
+
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+
+                                    children: <Widget>[
+                                      Text('Home', textAlign: TextAlign.right, style: TextStyle(
+                                          color: Color.fromRGBO(255, 255, 255, 1),
+                                          fontFamily: 'Inter',
+                                          fontSize: 16,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.normal,
+                                          height: 5.03125
+                                      ),), SizedBox(width : 64),
+                                      Text('Language', textAlign: TextAlign.right, style: TextStyle(
+                                          color: Color.fromRGBO(209, 209, 209, 1),
+                                          fontFamily: 'Inter',
+                                          fontSize: 16,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.normal,
+                                          height: 5.03125
+                                      ),), SizedBox(width : 64),
+                                      Text('Server', textAlign: TextAlign.right, style: TextStyle(
+                                          color: Color.fromRGBO(209, 209, 209, 1),
+                                          fontFamily: 'Inter',
+                                          fontSize: 16,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.normal,
+                                          height: 5.03125
+                                      ),), SizedBox(width : 64),
+                                      Text('Setting', textAlign: TextAlign.right, style: TextStyle(
+                                          color: Color.fromRGBO(209, 209, 209, 1),
+                                          fontFamily: 'Inter',
+                                          fontSize: 16,
+                                          letterSpacing: 1,
+                                          fontWeight: FontWeight.normal,
+                                          height: 5.03125
+                                      ),),
+
+                                    ],
+                                  ),
+                                )
+                            ),Positioned(
+                                top: 127,
+                                left: 150,
+                                child: Transform.rotate(
+                                  angle: 1.4033419209422001e-14 * (math.pi / 180),
+                                  child: Divider(
+                                      color: Color.fromRGBO(76, 76, 76, 1),
+                                      thickness: 1
+                                  )
+                                  ,
+                                )
+                            ),
+                          ]
+                      )
+                  )
+              ),
+              Positioned(
+                  top: 297,
+                  left: 188,
+                  child: Container(
+                      width: 1142,
+                      height: 379,
+                      child: Stack(
+                          children: <Widget>[
+                            Positioned(
+                                top: 7,
+                                left: 2,
+                                child: Text('Tools', textAlign: TextAlign.left,  style: TextStyle(
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    fontFamily: 'Sora',
+                                    fontSize: 48,
+                                    letterSpacing: 1,
+                                    fontWeight: FontWeight.normal,
+                                    height: 1.1666666666666667),
+                                )
+                            ),
+                            Positioned(
+                                top: 97,
+                                left: 3,
+                                child: SizedBox(
+                                    width: 554,
+                                    height: 282,
+                                    child: ToolSelector(toolName: '가공무역 계산기', toolImage: 'ProcessingTrade')
+                                )
+                            ),
+                            Positioned(
+                                top: 97,
+                                left: 589,
+                                child: SizedBox(
+                                    width: 554,
+                                    height: 282,
+                                    child: ToolSelector(toolName: '추가 예정입니다', toolImage: 'ProcessingTrade')
+                                )
+                            ),
+                          ]
+                      )
+                  )
+              ),
+            ]
+        )
+    );
+  }
+}
+
+
+class ToolSelector extends StatelessWidget{
+  const ToolSelector({Key? key, required this.toolName, required this.toolImage}) : super(key: key);
+
+  final String toolName,toolImage;
+
+  @override
+  Widget build(BuildContext context){
+    return Stack(
+        children: <Widget>[
+          Positioned(
+              top: 0,
+              left: -1,
+              child: Container(
+                  width: 556,
+                  height: 282,
+                  decoration: BoxDecoration(
+                    borderRadius : BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                    color : Color.fromRGBO(60, 60, 60, 1),
+                  ),
+                  child: Image.asset('images/$toolImage.png')
+              )
+          ),
+          Positioned(
+              top: 24,
+              left: 39,
+              child: Text(toolName, textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  fontFamily: 'Sora',
+                  fontSize: 28,
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.normal,
+                  height: 2.5714285714285716
+                ),
+              )
+          ),
+        ]
     );
   }
 }
