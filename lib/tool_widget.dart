@@ -29,32 +29,44 @@ class ToolWidget extends StatelessWidget {
     return Container(
       width: 350,
       height: 80,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10.0),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: Offset(0, 3),
-          ),
-        ],
+        color: Color.fromRGBO(60, 60, 60, 1),
       ),
       child: Row(
         children: [
-          Image.asset(
-            'images/$toolImage.png',
-            width: 60,
-            height: 60,
-          ),
-          SizedBox(width: 20),
-          Text(
-            toolName,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          buildImageWidget(),
+          Flexible(
+            fit: FlexFit.tight,
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Text(
+                toolName,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  fontFamily: 'Sora',
+                  fontSize: 16,
+                  letterSpacing: 1,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget buildImageWidget() {
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('images/$toolImage.png'),
+          fit: BoxFit.fitWidth,
+        ),
       ),
     );
   }

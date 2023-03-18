@@ -27,16 +27,22 @@ class _ToolDetailPageState extends State<ToolDetailPage> {
               child: Container(
                 width: 200,
                 height: 200,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('images/${widget.toolImage}.png'),
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                child: buildImageWidget(),
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget buildImageWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('images/${widget.toolImage}.png'),
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
