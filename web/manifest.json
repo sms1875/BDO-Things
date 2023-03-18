@@ -1,6 +1,6 @@
 {
-    "name": "bdo_tool",
-    "short_name": "bdo_tool",
+    "name": "bdo_things",
+    "short_name": "bdo_things",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

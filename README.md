@@ -1,6 +1,6 @@
-# bdo_tool
+# bdo_things
 
-Black Desert Online Tool
+Black Desert Online Things
 
 ## Getting Started
 

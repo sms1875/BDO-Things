@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="github.sms1875.bdo_tool">
+    package="io.github.sms1875.bdo_things">
     <application
-        android:label="bdo_tool"
+        android:label="검은사막 things"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

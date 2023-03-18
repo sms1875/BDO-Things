@@ -1,6 +1,6 @@
-import 'package:bdo_tool/responsive/desktop_body.dart';
-import 'package:bdo_tool/responsive/mobile_body.dart';
-import 'package:bdo_tool/responsive/responsive_layout.dart';
+import 'package:bdo_things/responsive/desktop_body.dart';
+import 'package:bdo_things/responsive/mobile_body.dart';
+import 'package:bdo_things/responsive/responsive_layout.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
