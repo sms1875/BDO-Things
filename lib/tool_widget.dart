@@ -22,14 +22,11 @@ class ToolWidget extends StatelessWidget {
     );
   }
 
-  Widget getPageWidget(String pageName) {
-    return pageMap[pageName]?.call() ?? pageMap['default']!.call();
-  }
-
   Widget getPage(String toolName) {
     for (var tool in toolsData) {
       if (tool['name'] == toolName) {
-        return getPageWidget(tool['page']!);
+        String pageName = tool['page'] ?? 'default';
+        return pageMap[pageName]?.call() ?? pageMap['default']!.call();
       }
     }
     return pageMap['default']!.call();
