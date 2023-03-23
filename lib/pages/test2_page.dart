@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bdo_things/constants.dart';
+import 'package:bdo_things/utils/constants.dart';
 import '../widgets/custom_app_bar.dart';
 
 class Test2Page extends StatelessWidget {
@@ -10,13 +10,13 @@ class Test2Page extends StatelessWidget {
     return Scaffold(
       backgroundColor: Constants.backgroundColor,
       appBar: CustomAppBar(),
-      body: ProcessingTradePageBody(),
+      body: Test2PageBody(),
     );
   }
 }
 
-class ProcessingTradePageBody extends StatelessWidget {
-  const ProcessingTradePageBody({Key? key}) : super(key: key);
+class Test2PageBody extends StatelessWidget {
+  const Test2PageBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
