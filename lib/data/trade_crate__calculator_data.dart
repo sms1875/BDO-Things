@@ -4,7 +4,7 @@ List<Map<String, dynamic>> tradeCrateData = [
     'name': '특상품 호박 상자',
     'materials': [
       {'materials_id':'4901', 'amount':1},
-      {'materials_id':'7340','amount':5},
+      {'materials_id':'7340','amount':10},
     ],
     'original_price': 31823,
   },
@@ -13,7 +13,7 @@ List<Map<String, dynamic>> tradeCrateData = [
     'name': '특상품 해바라기 상자',
     'materials': [
       {'materials_id':'4901', 'amount':1},
-      {'materials_id':'7342','amount':5},
+      {'materials_id':'7342','amount':10},
     ],
     'original_price': 36860,
   },
@@ -22,7 +22,7 @@ List<Map<String, dynamic>> tradeCrateData = [
     'name': '특상품 다우베니아 아우레아 상자',
     'materials': [
       {'materials_id':'4901', 'amount':1},
-      {'materials_id':'5505','amount':5},
+      {'materials_id':'5505','amount':10},
     ],
     'original_price': 23724,
   },
