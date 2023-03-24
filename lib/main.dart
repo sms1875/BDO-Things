@@ -1,8 +1,15 @@
+import 'dart:io';
+import 'package:bdo_things/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';
+import 'package:window_manager/window_manager.dart';
 
-void main() {
-  //set app min size
+void main()async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await windowManager.ensureInitialized();
+  if (Platform.isWindows) {
+    WindowManager.instance.setMinimumSize(const Size(600, 480));
+    WindowManager.instance.setMaximizable(true);
+  }
   runApp(const MyApp());
 }
 
