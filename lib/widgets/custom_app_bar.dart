@@ -13,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       title: InkWell(
         borderRadius: BorderRadius.circular(1.0),
-        onTap: Navigator.of(context).canPop() ? () => Navigator.of(context).pop() : null,
+        onTap: Navigator.of(context).canPop() ? () => Navigator.of(context).popUntil((route) => route.isFirst): null,
         child: const Text(
           'BDO Things',
           style: TextStyle(
@@ -28,9 +28,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.settings),
           onPressed: () {
-            print('Settings');
+            if (ModalRoute.of(context)?.settings.name != '/setting_page') {
+              Navigator.pushNamed(context, '/setting_page');
+            }
           },
-        ),
+        )
       ],
     );
   }

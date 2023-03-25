@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../utils/constants.dart';
 import '../utils/page_map.dart';
 
 class ToolWidget extends StatelessWidget {
@@ -36,9 +37,7 @@ class ToolWidget extends StatelessWidget {
       width: 350,
       height: 80,
       padding: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(60, 60, 60, 1),
-      ),
+      color : Constants.widgetBackgroundColor,
       child: Row(
         children: [
           _buildToolImage(data['image']),
@@ -47,10 +46,7 @@ class ToolWidget extends StatelessWidget {
             child: Text(
               data['name']!,
               textAlign: TextAlign.left,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-              ),
+              style: Constants.widgetTextStyle
             ),
           ),
         ],

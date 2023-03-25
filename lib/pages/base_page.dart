@@ -14,22 +14,28 @@ class BasePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Constants.backgroundColor,
       appBar: const CustomAppBar(),
-      body: Padding(
-        padding: Constants.pagePadding,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 15),
-              child: Text(
-                pageTitle,
-                style: Constants.pageTitleTextStyle,
-              ),
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height - AppBar().preferredSize.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
+            minWidth:  MediaQuery.of(context).size.width
+          ),
+          child: Padding(
+            padding: Constants.pagePadding,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  child: Text(
+                    pageTitle,
+                    style: Constants.pageTitleTextStyle,
+                  ),
+                ),
+                body,
+              ],
             ),
-            Expanded(
-                child: body
-            ),
-          ],
+          ),
         ),
       ),
     );

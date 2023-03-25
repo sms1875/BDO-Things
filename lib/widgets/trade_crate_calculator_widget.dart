@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../data/life_skill_data.dart';
 import '../data/trade_crate__calculator_data.dart';
 import '../get_world_market_search_list_api.dart';
 import '../utils/constants.dart';
@@ -87,7 +88,7 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   }
 
   int _calculateSellingPrice(int originalPrice) {
-    double bargainBonus=1.35;//0.05+무역레벨
+    num bargainBonus = 1 + (lifeSkillData.firstWhere((data) => data['name'] == '채집')['lifeSkillLevel'] * 0.5);
     double desertBonus=1.5;
     final destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 1;
     int result = (originalPrice * (destanceBonus*desertBonus*bargainBonus)).toInt();
@@ -96,26 +97,33 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
+    return Wrap(
         children: [
           isLoading
               ? const Center(child: CircularProgressIndicator())
               : Column(
             children: [
               _buildDropdown(),
-              _buildTable(),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: _buildTable(),
+              ),
+              Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  '※ 거래소 가격은 시작가를 기준으로 계산되었습니다.',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
             ],
           ),
         ],
-      ),
     );
   }
 
   Widget _buildTable() {
     return DataTable(
-      dataRowHeight: 60.0,
+      dataRowMinHeight: 60.0,
       columns: [
         DataColumn(label: Text('')),
         DataColumn(label: Text('이름')),

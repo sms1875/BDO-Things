@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:bdo_things/pages/home_page.dart';
+import 'package:bdo_things/pages/setting_page.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -22,8 +23,12 @@ class MyApp extends StatelessWidget {
       builder: (context, constraints) {
 
         return MaterialApp(
+
           debugShowCheckedModeBanner: false,
           home: HomePage(),
+          routes: {
+            '/setting_page': (context) => SettingPage(),
+          },
         );
       },
     );
