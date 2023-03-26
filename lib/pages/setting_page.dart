@@ -2,6 +2,7 @@ import 'package:bdo_things/widgets/setting_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../data/life_skill_data.dart';
+import '../main.dart';
 import 'base_page.dart';
 
 class SettingPage extends StatefulWidget {
@@ -13,39 +14,79 @@ class SettingPage extends StatefulWidget {
   State<SettingPage> createState() => _SettingPageState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _SettingPageState extends State<SettingPage> with RouteAware {
+  bool _unsavedChanges = false;
 
-  Future<bool?> _onWillPop(BuildContext context) async {
-    return showDialog<bool>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Do you want to save your changes?'),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('No'),
-              onPressed: () => Navigator.pop(context, false),
-            ),
-            TextButton(
-              child: const Text('Yes'),
-              onPressed: () {
-                // Save changes here
-                Navigator.pop(context, true);
-              },
-            ),
-          ],
-        );
-      },
-    );
+  @override
+  void initState() {
+    super.initState();
+    _unsavedChanges = true;
+  }
+
+  @override
+  void dispose() {
+    // Remove the listener when the widget is disposed
+    //_controller.removeListener(_unsavedChangesListener);
+    super.dispose();
+  }
+
+  void _unsavedChangesListener() {
+    if (!_unsavedChanges ) {
+      setState(() {
+        _unsavedChanges = true;
+      });
+    }
+  }
+
+  Future<bool> _onWillPop() async {
+    // Show a confirmation dialog box when there are unsaved changes
+    if (_unsavedChanges) {
+      final bool? result = await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Save changes?'),
+            content: Text('Do you want to save the changes you made?'),
+            actions: <Widget>[
+              TextButton(
+                child: Text('Discard'),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              TextButton(
+                child: Text('Save'),
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                },
+              ),
+            ],
+          );
+        },
+      );
+      if (result == null) {
+        return false;
+      } else if (result) {
+        // Save the changes and return to the previous page
+        //_saveChanges();
+        return true;
+      } else {
+        // Discard the changes and return to the previous page
+        //_discardChanges();
+        return true;
+      }
+    }
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
-      pageTitle: SettingPage.pageTitle,
-      body: SettingWidget(lifeSkillData: lifeSkillData,)
+    return WillPopScope(
+      onWillPop: _onWillPop, // Add the onWillPop callback to the widget
+      child: BasePage(
+        pageTitle: SettingPage.pageTitle,
+        body: SettingWidget(lifeSkillData: lifeSkillData,),
+      ),
     );
   }
-
-
 }

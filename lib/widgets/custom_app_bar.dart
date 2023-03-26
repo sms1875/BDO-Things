@@ -24,8 +24,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.settings),
           onPressed: () {
-            if (ModalRoute.of(context)?.settings.name != '/setting_page') {
-              Navigator.pushNamed(context, '/setting_page');
+            if (ModalRoute.of(context)?.settings.name != 'setting_page') {
+              Navigator.pushNamed(context, 'setting_page');
             }
           },
         )

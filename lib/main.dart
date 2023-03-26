@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:bdo_things/pages/home_page.dart';
-import 'package:bdo_things/utils/route_aware.dart';
+import 'package:bdo_things/utils/route_observer.dart';
 import 'package:bdo_things/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
@@ -26,8 +26,9 @@ class MyApp extends StatelessWidget {
       builder: (context, constraints) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: const HomePage(),
-          navigatorObservers: [routeObserver],
+          navigatorObservers: [CommonRouteObserver()],
+          
+          initialRoute: '/',
           routes: routes(context),
         );
       },
