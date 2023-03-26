@@ -19,7 +19,6 @@ class _SettingWidgetState extends State<SettingWidget> {
     super.initState();
     lifeSkillData = widget.lifeSkillData;
   }
-
   @override
   Widget build(BuildContext context) {
     return  Wrap(
@@ -27,11 +26,21 @@ class _SettingWidgetState extends State<SettingWidget> {
       runSpacing: 10.0,
       alignment: WrapAlignment.end,
       children: [
-        Container(
-          color: Colors.white,
-          child: Text('마노스 장비 칸'),
-          width: 560,
-          height: 900,
+        Column(
+            children: [
+              Container(
+                color: Colors.white,
+                child: Text('마노스 장비 칸'),
+                width: 560,
+                height: 600,
+              ),
+              Container(
+                color: Colors.blue,
+                child: Text('도핑등'),
+                width: 560,
+                height: 200,
+              ),
+            ]
         ),
         Column(
           children: [
@@ -73,7 +82,7 @@ class _SettingWidgetState extends State<SettingWidget> {
           child: Container(
             color: Constants.widgetBackgroundColor,
             width: 540,
-            height: 80,
+            height: 70,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
               child: Row(
@@ -87,8 +96,11 @@ class _SettingWidgetState extends State<SettingWidget> {
                     child: Text(data['name'], style: Constants.widgetTextStyle),
                   ),
                   DropdownButton<String>(
-                    value: _getLifeSkillName(data),
-                    onChanged: (newValue) {},
+                    value: _getLifeSkillLevelName(data),
+                    onChanged: (newValue) {
+                      setState(() {
+                      });
+                    },
                     items: Constants.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
                   ),
                   Padding(
@@ -156,7 +168,7 @@ class _SettingWidgetState extends State<SettingWidget> {
     return widgetList;
   }
 
-  String _getLifeSkillName(Map<String, dynamic> data) {
+  String _getLifeSkillLevelName(Map<String, dynamic> data) {
     int lifeSkillLevel = data['lifeSkillLevel'];
     int index = 0;
     if (lifeSkillLevel >= 10) {
@@ -195,4 +207,7 @@ class _SettingWidgetState extends State<SettingWidget> {
     }
     return mastery;
   }
+
+
 }
+

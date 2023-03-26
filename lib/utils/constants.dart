@@ -5,6 +5,12 @@ class Constants {
   static const widgetBackgroundColor = Color.fromRGBO(60, 60, 60, 1);
   static const pagePadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
 
+  static const TextStyle appBarTextStyle = TextStyle(
+    color: Colors.white,
+    fontSize: 32,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle pageTitleTextStyle = TextStyle(
     color: Colors.white,
     fontSize: 24,

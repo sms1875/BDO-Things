@@ -16,11 +16,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         onTap: Navigator.of(context).canPop() ? () => Navigator.of(context).popUntil((route) => route.isFirst): null,
         child: const Text(
           'BDO Things',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 32.0,
-          ),
+          style: Constants.appBarTextStyle,
           textAlign: TextAlign.center,
         ),
       ),

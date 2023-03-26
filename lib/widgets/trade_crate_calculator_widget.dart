@@ -97,33 +97,28 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-        children: [
-          isLoading
-              ? const Center(child: CircularProgressIndicator())
-              : Column(
-            children: [
-              _buildDropdown(),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: _buildTable(),
-              ),
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '※ 거래소 가격은 시작가를 기준으로 계산되었습니다.',
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            ],
+    return isLoading ?
+    const Center(child: CircularProgressIndicator()) : Column(
+      children: [
+        _buildDropdown(),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: _buildTable(),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '※ 거래소 가격은 시작가를 기준으로 계산되었습니다.',
+            style: TextStyle(color: Colors.red),
           ),
-        ],
+        ),
+      ],
     );
   }
 
   Widget _buildTable() {
     return DataTable(
-      dataRowMinHeight: 60.0,
+      dataRowHeight: 60.0,
       columns: [
         DataColumn(label: Text('')),
         DataColumn(label: Text('이름')),
@@ -154,8 +149,8 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
       cells: [
         DataCell(
           SizedBox(
-            width: 50,
-            height: 50,
+            width: 40,
+            height: 40,
             child: Center(
               child: Image.network(
                 'https://bdocodex.com/items/new_icon/03_etc/07_productmaterial/${data['id'].padLeft(8, '0')}.webp',

@@ -1,10 +1,11 @@
 import 'dart:io';
 import 'package:bdo_things/pages/home_page.dart';
-import 'package:bdo_things/pages/setting_page.dart';
+import 'package:bdo_things/utils/route_aware.dart';
+import 'package:bdo_things/utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
-void main()async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await windowManager.ensureInitialized();
   if (Platform.isWindows) {
@@ -14,6 +15,8 @@ void main()async{
   runApp(const MyApp());
 }
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -21,14 +24,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-
         return MaterialApp(
-
           debugShowCheckedModeBanner: false,
-          home: HomePage(),
-          routes: {
-            '/setting_page': (context) => SettingPage(),
-          },
+          home: const HomePage(),
+          navigatorObservers: [routeObserver],
+          routes: routes(context),
         );
       },
     );
