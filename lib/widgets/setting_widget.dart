@@ -108,7 +108,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         _selectedLifeSkillLevel=1;
                         data['lifeSkillLevel'] = _selectedLifeSkillLevelName + _selectedLifeSkillLevel;
                       });
-                    },
+                      },
                     items: Constants.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
                   ),
                   Padding(
@@ -225,34 +225,18 @@ class _SettingWidgetState extends State<SettingWidget> {
         index = 6;
       }
     }
-    return Constants.lifeSkillLevels[index];
+    return Constants.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList()[index].value!;
   }
 
   int _getLifeSkillLevel(Map<String, dynamic> data){
     int lifeSkillLevel = data['lifeSkillLevel'];
     int levelThreshold = lifeSkillLevel <= 50 ? 10 : lifeSkillLevel <= 80 ? 50 : 80;
-    return lifeSkillLevel % levelThreshold;
-  }
-
-  String _setLifeSkillLevelName(Map<String, dynamic> data) {
-    int lifeSkillLevel = data['lifeSkillLevel'];
-    int index = 0;
-    if (lifeSkillLevel >= 10) {
-      if (lifeSkillLevel <= 20) {
-        index = 1;
-      } else if (lifeSkillLevel <= 30) {
-        index = 2;
-      } else if (lifeSkillLevel <= 40) {
-        index = 3;
-      } else if (lifeSkillLevel <= 50) {
-        index = 4;
-      } else if (lifeSkillLevel <= 80) {
-        index = 5;
-      } else {
-        index = 6;
-      }
+    if (lifeSkillLevel % levelThreshold == 0) {
+      return levelThreshold;
     }
-    return Constants.lifeSkillLevels[index];
+    else {
+      return lifeSkillLevel % levelThreshold;
+    }
   }
 
   int _getMastery(Map<String, dynamic> data) {

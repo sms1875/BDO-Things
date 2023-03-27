@@ -88,11 +88,11 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   }
 
   int _calculateSellingPrice(int originalPrice) {
-    num bargainBonus = 0.05+lifeSkillData.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * 0.005;
-    double desertBonus=0.5;
-    final destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
-    int result = (originalPrice * ((1+destanceBonus)*(1+desertBonus)*(1+bargainBonus))).toInt();
-    return result;
+    double bargainBonus = 0.05+lifeSkillData.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * 0.005;
+    double desertBonus = 0.5;
+    double destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
+    int sellingPrice = (originalPrice * ((1+destanceBonus)*(1+desertBonus)*(1+bargainBonus))).toInt();
+    return sellingPrice;
   }
 
   @override
