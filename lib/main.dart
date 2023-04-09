@@ -6,11 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await windowManager.ensureInitialized();
-  if (Platform.isWindows) {
+
+  try
+  { if (Platform.isWindows) {
+    WidgetsFlutterBinding.ensureInitialized();
+    await windowManager.ensureInitialized();
     WindowManager.instance.setMinimumSize(const Size(600, 480));
     WindowManager.instance.setMaximizable(true);
+  }
+  }
+  catch(e)
+  {
   }
   runApp(const MyApp());
 }

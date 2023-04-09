@@ -32,8 +32,8 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
     super.initState();
     _tradeCrateData = widget.tradeCrateData;
     _sortStatus = TradeCrateSortStatus.none;
-    selectedOriginRoute = Constants.routes.elementAt(0);
-    selectedDestinationRoute = Constants.routes.elementAt(3);
+    selectedOriginRoute = Constants.originRoutes.elementAt(2);
+    selectedDestinationRoute = Constants.destinationRoutes.elementAt(1);
     isLoading = true;
     _getTableData();
   }
@@ -89,9 +89,9 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
 
   int _calculateSellingPrice(int originalPrice) {
     double bargainBonus = 0.05+lifeSkillData.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * 0.005;
-    double desertBonus = 0.5;
-    double destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
-    int sellingPrice = (originalPrice * ((1+destanceBonus)*(1+desertBonus)*(1+bargainBonus))).toInt();
+    //double desertBonus = 0.5; 분배버프 삭제
+    num destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
+    int sellingPrice = ((originalPrice) * ((1+destanceBonus)*(1+bargainBonus))).toInt();
     return sellingPrice;
   }
 
@@ -177,11 +177,11 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   Widget _buildDropdown() {
     return Row(
         children: [
-          _buildDropdownButton(selectedOriginRoute, Constants.routes, '원산지', (value) {
+          _buildDropdownButton(selectedOriginRoute, Constants.originRoutes, '원산지', (value) {
             selectedOriginRoute = value!;
           }),
           SizedBox(width: 20),
-          _buildDropdownButton(selectedDestinationRoute, Constants.routes, '판매지', (value) {
+          _buildDropdownButton(selectedDestinationRoute, Constants.destinationRoutes, '판매지', (value) {
             selectedDestinationRoute = value!;
           }),
         ]
