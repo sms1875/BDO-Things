@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bdo_things/utils/constants.dart';
-import '../widgets/base/custom_app_bar.dart';
 import 'base_page.dart';
 
 class Test2Page extends StatelessWidget {

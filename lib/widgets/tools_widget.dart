@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
 
-class HomeWidget extends StatelessWidget {
-  const HomeWidget({
+class ToolsWidget extends StatelessWidget {
+  const ToolsWidget({
     Key? key,
     required this.toolData,
   }) : super(key: key);

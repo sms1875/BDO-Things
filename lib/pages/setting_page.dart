@@ -2,7 +2,6 @@ import 'package:bdo_things/widgets/setting_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../data/life_skill_data.dart';
-import '../main.dart';
 import 'base_page.dart';
 
 class SettingPage extends StatefulWidget {

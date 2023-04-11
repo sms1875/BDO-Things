@@ -10,6 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return SizedBox.fromSize(
       size: preferredSize,
       child: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Constants.backgroundColor,
         elevation: 2,
         centerTitle: true,

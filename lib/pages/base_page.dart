@@ -1,12 +1,8 @@
-import 'package:bdo_things/pages/setting_page.dart';
-import 'package:bdo_things/pages/test1_page.dart';
-import 'package:bdo_things/pages/test2_page.dart';
 import 'package:bdo_things/widgets/base/custom_navigation_rail.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
 import '../widgets/base/custom_app_bar.dart';
-import 'tools_page.dart';
 
 class BasePage extends StatefulWidget {
   final String pageTitle;
@@ -29,6 +25,8 @@ class BasePageState extends State<BasePage> {
       body: Row(
         children: <Widget>[
           CustomNavigationRail(),
+          Divider(thickness: 1, height: 1),
+          // This is the main content.
           Expanded(
             child: ListView.builder(
               itemCount: 1,
