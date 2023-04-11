@@ -39,6 +39,8 @@ dependencies:
   http: ^0.13.5
   window_manager: ^0.3.1
   url_launcher: ^6.0.12
+  table_calendar: ^3.0.3
+  syncfusion_flutter_calendar: ^19.3.56-beta
 
 dev_dependencies:
   flutter_test:

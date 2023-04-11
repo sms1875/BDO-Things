@@ -3,17 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../data/event_widget_data.dart';
-import '../utils/constants.dart';
+import '../../data/event_widget_data.dart';
+import '../../utils/constants.dart';
 
-class EventsBannerWidget extends StatefulWidget {
-  const EventsBannerWidget({Key? key}) : super(key: key);
+class EventBannerWidget extends StatefulWidget {
+  const EventBannerWidget({Key? key}) : super(key: key);
 
   @override
-  _EventsBannerWidgetState createState() => _EventsBannerWidgetState();
+  _EventBannerWidgetState createState() => _EventBannerWidgetState();
 }
 
-class _EventsBannerWidgetState extends State<EventsBannerWidget> {
+class _EventBannerWidgetState extends State<EventBannerWidget> {
   int _selectedSlideIndex = 0;
   late PageController _pageController;
   late Timer _timer;
@@ -103,9 +103,10 @@ class _EventsBannerWidgetState extends State<EventsBannerWidget> {
       child: Container(
         color: Constants.widgetBackgroundColor,
         width: 300,
-        height: 250,
+        padding: EdgeInsets.all(10),
         child: Column(
           children: [
+            Text('Events', style: TextStyle(fontSize: 20)),
             SizedBox(
               height: 200,
               width: 250,

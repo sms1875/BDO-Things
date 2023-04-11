@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'events_banner_widget.dart';
+import '../../data/coupons_widget_data.dart';
+import '../../utils/constants.dart';
+import 'coupon_table_widget.dart';
+import 'event_banner_widget.dart';
+import 'event_calendar_widget.dart';
 
 class HomeWidget extends StatefulWidget {
 
@@ -11,7 +15,6 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
 
-
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -22,19 +25,17 @@ class _HomeWidgetState extends State<HomeWidget> {
         Row(
           children: [
             Expanded(
-                flex: 1,
-                child:
-                Column(
-                  children: [
-                    EventsBannerWidget(),
-                    SizedBox(height: 10),
-                    Container(
-                      color: Colors.white,
-                      child: Text('왼쪽 아래 배너'),
-                      height: 300,
-                    ),
-                  ],
-                )
+              flex: 1,
+              child:
+              Column(
+                children: [
+                  CouponTableWidget(),
+                  SizedBox(height: 10),
+                  EventBannerWidget(),
+                  SizedBox(height: 10),
+                  EventCalendarWidget(),
+                ],
+              ),
             ),
             Expanded(
               flex: 2,
