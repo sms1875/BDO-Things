@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:bdo_things/utils/constants.dart';
-import '../widgets/custom_app_bar.dart';
+import '../widgets/base/custom_app_bar.dart';
+import 'base_page.dart';
 
 class Test2Page extends StatelessWidget {
   static const pageTitle = 'Test2';
 
+  const Test2Page({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Constants.backgroundColor,
-      appBar: CustomAppBar(),
-      body: Test2PageBody(),
-    );
+    return Test2PageBody();
   }
 }
 
@@ -20,28 +19,9 @@ class Test2PageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: Constants.pagePadding,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
-            child: Text(
-              Test2Page.pageTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                letterSpacing: 1,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text('test2'),
-          ),
-        ],
-      ),
+    return BasePage(
+      pageTitle: Test2Page.pageTitle,
+      body: Text('Test2'),
     );
   }
 }

@@ -1,42 +1,54 @@
+import 'package:bdo_things/pages/setting_page.dart';
+import 'package:bdo_things/pages/test1_page.dart';
+import 'package:bdo_things/pages/test2_page.dart';
+import 'package:bdo_things/widgets/base/custom_navigation_rail.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
-import '../widgets/custom_app_bar.dart';
+import '../widgets/base/custom_app_bar.dart';
+import 'tools_page.dart';
 
-class BasePage extends StatelessWidget {
+class BasePage extends StatefulWidget {
   final String pageTitle;
   final Widget body;
-
   const BasePage({Key? key, required this.pageTitle, required this.body,}) : super(key: key);
+
+  @override
+  State<BasePage> createState() => BasePageState();
+}
+
+class BasePageState extends State<BasePage> {
+  String get pageTitle => widget.pageTitle;
+  Widget get body => widget.body;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.backgroundColor,
       appBar: const CustomAppBar(),
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height - AppBar().preferredSize.height - MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom,
-            minWidth:  MediaQuery.of(context).size.width
-          ),
-          child: Padding(
-            padding: Constants.pagePadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  child: Text(
-                    pageTitle,
-                    style: Constants.pageTitleTextStyle,
-                  ),
-                ),
-                body,
-              ],
+      body: Row(
+        children: <Widget>[
+          CustomNavigationRail(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        pageTitle,
+                        style: Constants.pageTitleTextStyle,
+                      ),
+                    ),
+                    body,
+                  ],
+                );
+              },
             ),
           ),
-        ),
+        ],
       ),
     );
   }

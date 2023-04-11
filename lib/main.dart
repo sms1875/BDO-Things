@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bdo_things/pages/home_page.dart';
+import 'package:bdo_things/pages/tools_page.dart';
 import 'package:bdo_things/utils/route_observer.dart';
 import 'package:bdo_things/utils/routes.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +33,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           navigatorObservers: [CommonRouteObserver()],
-          
-          initialRoute: '/',
+          initialRoute: 'Home',
           routes: routes(context),
         );
       },

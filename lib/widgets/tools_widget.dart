@@ -73,3 +73,9 @@ class ToolItem extends StatelessWidget {
     );
   }
 }
+
+List<Map<String, String>> toolData = [
+  {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
+  {'name': '예비1', 'image': 'tradeCrate', 'page': 'Test1'},
+  {'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
+];

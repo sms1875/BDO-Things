@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../data/trade_crate__calculator_data.dart';
 import '../get_world_market_search_list_api.dart';
+import 'base_page.dart';
 
 
 class Test1Page extends StatefulWidget {
@@ -47,10 +48,8 @@ class _Test1PageState extends State<Test1Page> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trade Crate Table'),
-      ),
+    return BasePage(
+      pageTitle: "test1",
       body: _tradeCrateDate == null
           ? const Center(child: CircularProgressIndicator())
           : DataTable(
