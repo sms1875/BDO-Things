@@ -1,7 +1,8 @@
+import 'package:bdo_things/presentation/pages/base_page.dart';
+import 'package:bdo_things/presentation/widgets/home/home_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/home/home_widget.dart';
-import 'base_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

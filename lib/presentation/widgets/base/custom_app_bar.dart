@@ -1,6 +1,6 @@
+import 'package:bdo_things/data/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       size: preferredSize,
       child: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Constants.backgroundColor,
+        backgroundColor: CONSTANTS.backgroundColor,
         elevation: 2,
         centerTitle: true,
         titleSpacing: 0,
@@ -20,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onTap: Navigator.of(context).canPop() ? () => Navigator.of(context).popUntil((route) => route.isFirst): null,
           child: const Text(
             'BDO Things',
-            style: Constants.appBarTextStyle,
+            style: CONSTANTS.appBarTextStyle,
             textAlign: TextAlign.center,
           ),
         ),

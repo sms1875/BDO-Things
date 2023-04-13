@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/constants.dart';
+import 'package:bdo_things/data/constants.dart';
 import 'trade_crate_calculator_widget.dart';
 
 class ToolsWidget extends StatefulWidget {
@@ -92,7 +92,7 @@ class ToolItem extends StatelessWidget {
         width: 350,
         height: 80,
         padding: const EdgeInsets.all(10.0),
-        color: Constants.widgetBackgroundColor,
+        color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
         child: Row(
           children: [
             _buildToolImage(data['image']),
@@ -101,7 +101,7 @@ class ToolItem extends StatelessWidget {
               child: Text(
                 data['name']!,
                 textAlign: TextAlign.left,
-                style: Constants.widgetTextStyle,
+                style: CONSTANTS.widgetTextStyle,
               ),
             ),
           ],

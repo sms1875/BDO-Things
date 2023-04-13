@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/constants.dart';
+import 'package:bdo_things/data/constants.dart';
 
 
 class SettingWidget extends StatefulWidget {
@@ -64,7 +64,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         Padding(
           padding: EdgeInsets.all(10),
           child: Container(
-            color: Constants.widgetBackgroundColor,
+            color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
             width: 540,
             height: 70,
             child: Padding(
@@ -77,7 +77,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 10.0),
-                    child: Text(data['name'], style: Constants.widgetTextStyle),
+                    child: Text(data['name'], style: CONSTANTS.widgetTextStyle),
                   ),
                   DropdownButton<String>(
                     value: _getLifeSkillLevelName(data),
@@ -110,7 +110,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                         data['lifeSkillLevel'] = _selectedLifeSkillLevelName + _selectedLifeSkillLevel;
                       });
                       },
-                    items: Constants.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
+                    items: CONSTANTS.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
@@ -128,13 +128,13 @@ class _SettingWidgetState extends State<SettingWidget> {
                   Spacer(),
                   Text(
                     '숙련도',
-                    style: Constants.widgetTextStyle,
+                    style: CONSTANTS.widgetTextStyle,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
                       _getMastery(data).toString(),
-                      style: Constants.widgetTextStyle,
+                      style: CONSTANTS.widgetTextStyle,
                     ),
                   ),
                 ],
@@ -165,14 +165,14 @@ class _SettingWidgetState extends State<SettingWidget> {
                       padding: const EdgeInsets.only(right: 10.0),
                       child: Text(
                         subMastery['name'],
-                        style: Constants.widgetTextStyle,
+                        style: CONSTANTS.widgetTextStyle,
                       ),
                     ),
                     Spacer(),
                     Padding(
                       padding: const EdgeInsets.only(right: 5.0),
                       child: Text('${_getMastery(data)}',
-                        style: Constants.widgetTextStyle,
+                        style: CONSTANTS.widgetTextStyle,
                       ),
                     ),
                   ],
@@ -226,7 +226,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         index = 6;
       }
     }
-    return Constants.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList()[index].value!;
+    return CONSTANTS.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList()[index].value!;
   }
 
   int _getLifeSkillLevel(Map<String, dynamic> data){

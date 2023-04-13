@@ -1,6 +1,8 @@
+import 'package:bdo_things/presentation/widgets/home/event/event_banner_widget.dart';
+import 'package:bdo_things/presentation/widgets/home/event/event_calendar_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'coupon_table_widget.dart';
+import 'coupon/coupon_table_widget.dart';
 
 class HomeWidget extends StatefulWidget {
 
@@ -32,9 +34,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     child: CouponTableWidget(),
                   ),
                   SizedBox(height: 10),
-                  //EventBannerWidget(),
+                  EventBannerWidget(),
                   SizedBox(height: 10),
-                  //EventCalendarWidget(),
+                  EventCalendarWidget(),
                 ],
               ),
             ),

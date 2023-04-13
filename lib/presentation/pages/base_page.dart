@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/constants.dart';
+import 'package:bdo_things/data/constants.dart';
 import '../widgets/base/custom_app_bar.dart';
 import '../widgets/base/custom_navigation_rail.dart';
 
@@ -20,7 +20,7 @@ class BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Constants.backgroundColor,
+      backgroundColor: CONSTANTS.backgroundColor,
       appBar: const CustomAppBar(),
       body: Row(
         children: <Widget>[
@@ -37,7 +37,7 @@ class BasePageState extends State<BasePage> {
                       padding: const EdgeInsets.all(16.0),
                       child: Text(
                         pageTitle,
-                        style: Constants.pageTitleTextStyle,
+                        style: CONSTANTS.pageTitleTextStyle,
                       ),
                     ),
                     body,

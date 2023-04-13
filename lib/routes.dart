@@ -1,8 +1,7 @@
+import 'package:bdo_things/presentation/pages/home/home_page.dart';
+import 'package:bdo_things/presentation/pages/setting_page.dart';
+import 'package:bdo_things/presentation/pages/tools_page.dart';
 import 'package:flutter/cupertino.dart';
-
-import 'app/pages/home_page.dart';
-import 'app/pages/setting_page.dart';
-import 'app/pages/tools_page.dart';
 
 Map<String, Widget Function(BuildContext)> routes(BuildContext context) {
   return {

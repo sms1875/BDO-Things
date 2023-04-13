@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../../data/constants.dart';
-import '../../../data/life_skill_data.dart';
-import '../../../get_world_market_search_list_api.dart';
+import 'package:bdo_things/data/constants.dart';
+import 'package:bdo_things/data/life_skill_data.dart';
+import 'package:bdo_things/get_world_market_search_list_api.dart';
 
 enum TradeCrateSortStatus {
   none,
@@ -45,8 +45,8 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
       _tradeCrateData = dataList;
       print(_tradeCrateData);
       _sortStatus = TradeCrateSortStatus.none;
-      selectedOriginRoute = Constants.originRoutes.elementAt(2);
-      selectedDestinationRoute = Constants.destinationRoutes.elementAt(1);
+      selectedOriginRoute = CONSTANTS.originRoutes.elementAt(2);
+      selectedDestinationRoute = CONSTANTS.destinationRoutes.elementAt(1);
       _getTableData();
       setState(() {
         isLoading = false;
@@ -106,7 +106,7 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   int _calculateSellingPrice(int originalPrice) {
     double bargainBonus = 0.05+lifeSkillData.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * 0.005;
     //double desertBonus = 0.5; 분배버프 삭제
-    num destanceBonus = Constants.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
+    num destanceBonus = CONSTANTS.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
     int sellingPrice = ((originalPrice) * ((1+destanceBonus)*(1+bargainBonus))).toInt();
     return sellingPrice;
   }
@@ -195,11 +195,11 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
     return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildDropdownButton(selectedOriginRoute, Constants.originRoutes, '원산지', (value) {
+          _buildDropdownButton(selectedOriginRoute, CONSTANTS.originRoutes, '원산지', (value) {
             selectedOriginRoute = value!;
           }),
           SizedBox(width: 20),
-          _buildDropdownButton(selectedDestinationRoute, Constants.destinationRoutes, '판매지', (value) {
+          _buildDropdownButton(selectedDestinationRoute, CONSTANTS.destinationRoutes, '판매지', (value) {
             selectedDestinationRoute = value!;
           }),
         ]

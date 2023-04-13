@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:bdo_things/route_observer.dart';
 import 'package:bdo_things/routes.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
-import 'firebase_options.dart';
 
 
 void main() async {
@@ -23,11 +21,11 @@ void main() async {
   {
     print(e);
   }
-
+/*
   await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform
   );
-
+*/
   runApp(const MyApp());
 }
 

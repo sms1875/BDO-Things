@@ -1,6 +1,6 @@
+import 'package:bdo_things/data/constants.dart';
 import 'package:flutter/material.dart';
 
-import '../../../data/constants.dart';
 
 
 
@@ -40,7 +40,7 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
   @override
   Widget build(BuildContext context) {
     return NavigationRail(
-      backgroundColor: Constants.backgroundColor,
+      backgroundColor: CONSTANTS.backgroundColor,
       selectedIndex: _selectedIndex,
       groupAlignment: groupAligment,
       labelType: labelType,
