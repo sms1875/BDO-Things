@@ -1,9 +1,9 @@
+import 'dart:convert';
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
-import '../../data/event_widget_data.dart';
 
 class EventCalendarWidget extends StatefulWidget {
   const EventCalendarWidget({Key? key}) : super(key: key);
@@ -13,6 +13,27 @@ class EventCalendarWidget extends StatefulWidget {
 }
 
 class _EventCalendarWidgetState extends State<EventCalendarWidget> {
+  final firestoreInstance = FirebaseFirestore.instance;
+
+  Future<List<Map<String, dynamic>>> getTradeCrateDesignData() async {
+    var result = await firestoreInstance.collection("event").get();
+    List<Map<String, dynamic>> dataList = [];
+    for (var result in result.docs) {
+      dataList.add(result.data());
+    }
+    return dataList;
+  }
+
+  late List<Map<String, dynamic>> eventList;
+
+  @override
+  void initState() {
+    super.initState();
+    eventList =  List<Map<String, dynamic>>.from(jsonDecode(eventList as String));
+    getTradeCrateDesignData().then((dataList) {
+      eventList = dataList;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

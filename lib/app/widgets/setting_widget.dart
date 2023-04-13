@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../utils/constants.dart';
+import '../../data/constants.dart';
+
 
 class SettingWidget extends StatefulWidget {
   final List<Map<String, dynamic>> lifeSkillData;

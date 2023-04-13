@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/constants.dart';
+import '../../../data/constants.dart';
+
+
 
 class CustomNavigationRail extends StatefulWidget {
   const CustomNavigationRail({Key? key}) : super(key: key);
@@ -62,14 +64,6 @@ List<Map<String, dynamic>> pageList = [
   {
     'name': 'Tools',
     'icon': Icons.pan_tool,
-  },
-  {
-    'name': 'Test1',
-    'icon': Icons.star_border,
-  },
-  {
-    'name': 'Test2',
-    'icon': Icons.star_border,
   },
   {
     'name': 'Setting',

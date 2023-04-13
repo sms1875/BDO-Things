@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/event_widget_data.dart';
-import '../../utils/constants.dart';
+import '../../../data/constants.dart';
 
 class EventBannerWidget extends StatefulWidget {
   const EventBannerWidget({Key? key}) : super(key: key);
@@ -14,6 +14,9 @@ class EventBannerWidget extends StatefulWidget {
 }
 
 class _EventBannerWidgetState extends State<EventBannerWidget> {
+  final firestoreInstance = FirebaseFirestore.instance;
+  late List<Map<String, dynamic>> eventList;
+  bool isLoading = true;
   int _selectedSlideIndex = 0;
   late PageController _pageController;
   late Timer _timer;
@@ -21,6 +24,7 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
   @override
   void initState() {
     super.initState();
+    _getEventData();
     _pageController = PageController(initialPage: 0);
     _startTimer();
   }
@@ -31,14 +35,23 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
     super.dispose();
   }
 
+  Future<void> _getEventData() async {
+    final result = await firestoreInstance.collection("event").get();
+    final dataList = result.docs.map((doc) => doc.data()).toList();
+    setState(() {
+      eventList = dataList;
+      isLoading = false;
+    });
+  }
+
   void _startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       if (_pageController.page == eventList.length - 1) {
         _pageController.animateToPage(0,
-            duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+            duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
       } else {
         _pageController.nextPage(
-            duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+            duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
       }
     });
   }
@@ -47,7 +60,7 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
     _timer.cancel();
   }
 
-  void _launchUrl(String url) async {
+  Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -65,20 +78,18 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
               width: 300,
               height: 150,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(eventList[index]['image']),
-                  fit: BoxFit.contain,
-                ),
+              child: Image.network(
+                eventList[index]['image'],
+                fit: BoxFit.contain,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               eventList[index]['title'],
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -93,7 +104,9 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
+    return isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : MouseRegion(
       onEnter: (event) {
         _cancelTimer(); // cancel the timer when the user hovers over the page view
       },

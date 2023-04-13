@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../data/coupons_widget_data.dart';
-import '../../utils/constants.dart';
+
 import 'coupon_table_widget.dart';
-import 'event_banner_widget.dart';
-import 'event_calendar_widget.dart';
 
 class HomeWidget extends StatefulWidget {
 
@@ -29,11 +26,15 @@ class _HomeWidgetState extends State<HomeWidget> {
               child:
               Column(
                 children: [
-                  CouponTableWidget(),
+                  SizedBox(
+                    height: 200,
+                    width: 300,
+                    child: CouponTableWidget(),
+                  ),
                   SizedBox(height: 10),
-                  EventBannerWidget(),
+                  //EventBannerWidget(),
                   SizedBox(height: 10),
-                  EventCalendarWidget(),
+                  //EventCalendarWidget(),
                 ],
               ),
             ),

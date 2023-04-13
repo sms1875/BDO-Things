@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
 
-import '../data/life_skill_data.dart';
-import '../data/trade_crate__calculator_data.dart';
-import '../get_world_market_search_list_api.dart';
-import '../utils/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-enum TradeCrateSortStatus {//정렬 상태
+import '../../../data/constants.dart';
+import '../../../data/life_skill_data.dart';
+import '../../../get_world_market_search_list_api.dart';
+
+enum TradeCrateSortStatus {
   none,
   profitAsc,
   profitDesc,
 }
 
 class TradeCrateCalculatorWidget extends StatefulWidget {
-  final List<Map<String, dynamic>> tradeCrateData;
-
-  TradeCrateCalculatorWidget({Key? key, required this.tradeCrateData}) : super(key: key);
+  TradeCrateCalculatorWidget({Key? key}) : super(key: key);
 
   @override
   _TradeCrateCalculatorWidgetState createState() => _TradeCrateCalculatorWidgetState();
 }
 
 class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget> {
+  final firestoreInstance = FirebaseFirestore.instance;
+
+  Future<List<Map<String, dynamic>>> getTradeCrateDesignData() async {
+    var result = await firestoreInstance.collection("design").get();
+    List<Map<String, dynamic>> dataList = [];
+    for (var result in result.docs) {
+      dataList.add(result.data());
+    }
+    return dataList;
+  }
+
   late List<Map<String, dynamic>> _tradeCrateData;
   late TradeCrateSortStatus _sortStatus;
   late String selectedOriginRoute;
@@ -30,17 +40,23 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   @override
   void initState() {
     super.initState();
-    _tradeCrateData = widget.tradeCrateData;
-    _sortStatus = TradeCrateSortStatus.none;
-    selectedOriginRoute = Constants.originRoutes.elementAt(2);
-    selectedDestinationRoute = Constants.destinationRoutes.elementAt(1);
     isLoading = true;
-    _getTableData();
+    getTradeCrateDesignData().then((dataList) {
+      _tradeCrateData = dataList;
+      print(_tradeCrateData);
+      _sortStatus = TradeCrateSortStatus.none;
+      selectedOriginRoute = Constants.originRoutes.elementAt(2);
+      selectedDestinationRoute = Constants.destinationRoutes.elementAt(1);
+      _getTableData();
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   Future<void> _getTableData() async {
     final dataWithMaterials = <Map<String, dynamic>>[];
-    for (final crate in tradeCrateData) {
+    for (final crate in _tradeCrateData) {
       final materials = crate['materials'] as List<dynamic>;
       int materialsTotalPrice = 0;
       for (final material in materials) {
@@ -98,7 +114,8 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   @override
   Widget build(BuildContext context) {
     return isLoading ?
-    const Center(child: CircularProgressIndicator()) : Column(
+    const Center(child: CircularProgressIndicator()) :
+    Column(
       children: [
         _buildDropdown(),
         SingleChildScrollView(
@@ -176,6 +193,7 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
 
   Widget _buildDropdown() {
     return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _buildDropdownButton(selectedOriginRoute, Constants.originRoutes, '원산지', (value) {
             selectedOriginRoute = value!;

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'base_page.dart';
-import '../widgets/trade_crate_calculator_widget.dart';
-import '../data/trade_crate__calculator_data.dart';
+import '../widgets/tools/trade_crate_calculator_widget.dart';
 
 class TradeCrateCalculatorPage extends StatelessWidget {
   const TradeCrateCalculatorPage({Key? key}) : super(key: key);
@@ -13,7 +12,7 @@ class TradeCrateCalculatorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePage(
       pageTitle: TradeCrateCalculatorPage.pageTitle,
-      body: TradeCrateCalculatorWidget(tradeCrateData: tradeCrateData),
+      body: TradeCrateCalculatorWidget(),
     );
   }
 }
