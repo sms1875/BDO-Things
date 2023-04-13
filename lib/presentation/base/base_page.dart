@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/data/constants.dart';
-import '../widgets/base/custom_app_bar.dart';
-import '../widgets/base/custom_navigation_rail.dart';
+import 'custom_app_bar.dart';
+import 'custom_navigation_rail.dart';
 
 class BasePage extends StatefulWidget {
   final String pageTitle;

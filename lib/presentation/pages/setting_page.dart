@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bdo_things/data/life_skill_data.dart';
 import '../widgets/setting_widget.dart';
-import 'base_page.dart';
+import '../base/base_page.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);

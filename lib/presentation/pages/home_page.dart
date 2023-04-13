@@ -1,4 +1,4 @@
-import 'package:bdo_things/presentation/pages/base_page.dart';
+import 'package:bdo_things/presentation/base/base_page.dart';
 import 'package:bdo_things/presentation/widgets/home/home_widget.dart';
 import 'package:flutter/material.dart';
 

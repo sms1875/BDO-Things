@@ -1,18 +1,12 @@
-import 'package:bdo_things/presentation/widgets/home/event/event_banner_widget.dart';
-import 'package:bdo_things/presentation/widgets/home/event/event_calendar_widget.dart';
+import 'package:bdo_things/presentation/controllers/home/coupon_controller.dart';
+import 'package:bdo_things/presentation/widgets/home/event_banner_widget.dart';
+import 'package:bdo_things/presentation/widgets/home/event_calendar_widget.dart';
 import 'package:flutter/material.dart';
 
-import 'coupon/coupon_table_widget.dart';
+import 'coupon_table_widget.dart';
 
-class HomeWidget extends StatefulWidget {
-
-  HomeWidget({Key? key}) : super(key: key);
-
-  @override
-  _HomeWidgetState createState() => _HomeWidgetState();
-}
-
-class _HomeWidgetState extends State<HomeWidget> {
+class HomeWidget extends StatelessWidget {
+  const HomeWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bdo_things/domain/entities/event.dart';
+import 'package:bdo_things/presentation/controllers/home/event_controller.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bdo_things/data/datasources/event_remote_datasource.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:bdo_things/data/constants.dart';
 import 'event_slider_widget.dart';
 
+
 class EventBannerWidget extends StatefulWidget {
   const EventBannerWidget({Key? key}) : super(key: key);
   @override
@@ -17,49 +19,24 @@ class EventBannerWidget extends StatefulWidget {
 }
 
 class _EventBannerWidgetState extends State<EventBannerWidget> {
-  late final EventRepository _eventRepository;
-  late final EventUseCase _eventUseCase;
+  late final EventController _eventController = EventController.instance;
   late final Future<List<Event>> _eventListFuture;
+  late PageController _pageController;
+  int _selectedSlideIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _eventRepository = EventRepositoryImpl(
-      remoteDataSource: EventRemoteDataSourceImpl(client: http.Client()),
-    );
-    _eventUseCase = EventUseCase(eventRepository: _eventRepository);
-    _eventListFuture = _eventUseCase.fetchEvents();
-
-
+    _eventController.init();
+    _eventListFuture = _eventController.getEventList();
     _pageController = PageController(initialPage: 0);
-    _startTimer();
   }
-
-  late List<List<Event>> eventDataList;
-  int _selectedSlideIndex = 0;
-  late PageController _pageController;
-  late Timer _timer;
 
   @override
   void dispose() {
-    _cancelTimer();
+    _pageController.dispose();
+    _eventController.dispose();
     super.dispose();
-  }
-
-  void _startTimer() {//자동으로 페이지 전환
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
-      if (_pageController.page == eventDataList.length - 1) {
-        _pageController.animateToPage(0,
-            duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-      } else {
-        _pageController.nextPage(
-            duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
-      }
-    });
-  }
-
-  void _cancelTimer() {
-    _timer.cancel();
   }
 
   @override
@@ -75,12 +52,14 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
           return Center(child: Text('No data found'));
         } else {
           final eventDataList = snapshot.data!;
+          // Initialize the page controller inside the builder method
+          _pageController = PageController(initialPage: 0);
           return MouseRegion(
             onEnter: (event) {
-              _cancelTimer(); // cancel the timer when the user hovers over the page view
+              _eventController.dispose();
             },
             onExit: (event) {
-              _startTimer();// restart the timer when the user leaves the area
+              _eventController.startAutoSlide();
             },
             child: Container(
               color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
@@ -94,11 +73,17 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
                     width: 250,
                     child: PageView.builder(
                       itemCount: eventDataList.length,
-                      itemBuilder: (context, index) => EventSlideWidget(eventData:eventDataList[index]),
+                      itemBuilder: (context, index) => EventSlideWidget(
+                        eventData: eventDataList[index],
+                      ),
                       controller: _pageController,
-                      onPageChanged: (index) => setState(() {
-                        _selectedSlideIndex = index;
-                      }),
+                      onPageChanged: (index) {
+                        // Reinitialize the page controller inside the onPageChanged callback
+                        _pageController = PageController(initialPage: index);
+                        setState(() {
+                          _selectedSlideIndex = index;
+                        });
+                      },
                     ),
                   ),
                   SizedBox(height: 10),

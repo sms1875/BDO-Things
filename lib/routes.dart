@@ -1,4 +1,4 @@
-import 'package:bdo_things/presentation/pages/home/home_page.dart';
+import 'package:bdo_things/presentation/pages/home_page.dart';
 import 'package:bdo_things/presentation/pages/setting_page.dart';
 import 'package:bdo_things/presentation/pages/tools_page.dart';
 import 'package:flutter/cupertino.dart';

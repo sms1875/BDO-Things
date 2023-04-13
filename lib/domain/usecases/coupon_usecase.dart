@@ -1,5 +1,5 @@
-import 'package:bdo_things/domain/entities/coupon.dart';
-import 'package:bdo_things/domain/repositories/coupon_repository.dart';
+import '../../domain/entities/coupon.dart';
+import '../../domain/repositories/coupon_repository.dart';
 
 class CouponUseCase {
   final CouponRepository _couponRepository;
