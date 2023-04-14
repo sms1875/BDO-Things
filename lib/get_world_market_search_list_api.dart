@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'https://trade.kr.playblackdesert.com';
+const String baseUrl = 'https://trade.kr.playblackdesert.com/Trademarket';
 
 class WorldMarketSearchListResult {
   final int resultCode;
@@ -27,7 +27,7 @@ class WorldMarketSearchListResult {
 
 Future<WorldMarketSearchListResult> getWorldMarketSearchList(
     String searchResult) async {
-  final url = Uri.parse('$baseUrl/Trademarket/GetWorldMarketSearchList');
+  final url = Uri.parse('$baseUrl/GetWorldMarketSearchList');
   final header = {
     'Content-Type': 'application/json',
     'User-Agent': 'BlackDesert',

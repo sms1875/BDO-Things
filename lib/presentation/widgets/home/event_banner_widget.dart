@@ -1,15 +1,9 @@
 import 'dart:async';
 import 'package:bdo_things/domain/entities/event.dart';
 import 'package:bdo_things/presentation/controllers/home/event_controller.dart';
-import 'package:http/http.dart' as http;
-
-import 'package:bdo_things/data/datasources/event_remote_datasource.dart';
-import 'package:bdo_things/data/repositories/event_repository_impl.dart';
-import 'package:bdo_things/domain/repositories/event_repository.dart';
-import 'package:bdo_things/domain/usecases/event_usecase.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:bdo_things/data/constants.dart';
-import 'event_slider_widget.dart';
 
 
 class EventBannerWidget extends StatefulWidget {
@@ -21,22 +15,13 @@ class EventBannerWidget extends StatefulWidget {
 class _EventBannerWidgetState extends State<EventBannerWidget> {
   late final EventController _eventController = EventController.instance;
   late final Future<List<Event>> _eventListFuture;
-  late PageController _pageController;
-  int _selectedSlideIndex = 0;
+  CarouselController _carouselController = CarouselController();
+  int selectedSlideIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _eventController.init();
     _eventListFuture = _eventController.getEventList();
-    _pageController = PageController(initialPage: 0);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    _eventController.dispose();
-    super.dispose();
   }
 
   @override
@@ -52,77 +37,112 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
           return Center(child: Text('No data found'));
         } else {
           final eventDataList = snapshot.data!;
-          // Initialize the page controller inside the builder method
-          _pageController = PageController(initialPage: 0);
-          return MouseRegion(
-            onEnter: (event) {
-              _eventController.dispose();
-            },
-            onExit: (event) {
-              _eventController.startAutoSlide();
-            },
-            child: Container(
+          return Container(
               color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
               width: 300,
               padding: EdgeInsets.all(10),
               child: Column(
                 children: [
                   Text('Events', style: TextStyle(fontSize: 20)),
-                  SizedBox(
-                    height: 200,
-                    width: 250,
-                    child: PageView.builder(
-                      itemCount: eventDataList.length,
-                      itemBuilder: (context, index) => EventSlideWidget(
-                        eventData: eventDataList[index],
-                      ),
-                      controller: _pageController,
-                      onPageChanged: (index) {
-                        // Reinitialize the page controller inside the onPageChanged callback
-                        _pageController = PageController(initialPage: index);
+                  CarouselSlider(
+                    items: eventDataList.map((eventData) => EventSlideWidget(eventData: eventData)).toList(),
+                    carouselController: _carouselController,
+                    options: CarouselOptions(
+                      height: 250,
+                      initialPage: 0,
+                      viewportFraction: 1,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      pauseAutoPlayOnTouch: true,
+                        pauseAutoPlayOnManualNavigate: true,
+                      onPageChanged: (index, reason) {
                         setState(() {
-                          _selectedSlideIndex = index;
+                          selectedSlideIndex = index;
                         });
                       },
                     ),
                   ),
-                  SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       eventDataList.length,
-                          (index) => GestureDetector(
-                        onTap: () {
-                          _pageController.animateToPage(
-                            index,
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                          setState(() {
-                            _selectedSlideIndex = index;
-                          });
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(4),
-                          child: Text(
-                            (index + 1).toString(),
-                            style: TextStyle(
-                              color: index == _selectedSlideIndex
-                                  ? Colors.blue
-                                  : Colors.grey,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                          (index) => SlideNum( // use the slidenum widget here
+                        index: index,
+                        selectedIndex: selectedSlideIndex,
                       ),
                     ),
-                  ),
+                  )
                 ],
-              ),
-            ),
+              )
           );
         }
       },
+    );
+  }
+}
+
+class EventSlideWidget extends StatelessWidget {
+  EventSlideWidget({Key? key, required this.eventData}) : super(key: key);
+
+  final Event eventData;
+  late final EventController _eventController = EventController.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _eventController.launchUrl(eventData),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 300,
+              height: 150,
+              child: Image.network(
+                eventData.image,
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              eventData.title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SlideNum extends StatelessWidget {
+  final int index;
+  final int selectedIndex;
+
+  const SlideNum({
+    Key? key,
+    required this.index,
+    required this.selectedIndex,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 2),
+      width: index == selectedIndex ? 12 : 6,
+      height: index == selectedIndex ? 12 : 6,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: index == selectedIndex ? Colors.blue : Colors.grey,
+      ),
     );
   }
 }
