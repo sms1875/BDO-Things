@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'https://trade.kr.playblackdesert.com/Trademarket';
+const String HEROKU_URL = 'https://cors-anywhere.herokuapp.com/';
+const String MARKET_URL = 'https://trade.kr.playblackdesert.com/Trademarket';
 
 class WorldMarketSearchListResult {
   final int resultCode;
@@ -27,8 +28,10 @@ class WorldMarketSearchListResult {
 
 Future<WorldMarketSearchListResult> getWorldMarketSearchList(
     String searchResult) async {
-  final url = Uri.parse('$baseUrl/GetWorldMarketSearchList');
+  print('$HEROKU_URL$MARKET_URL/GetWorldMarketSearchList');
+  final url = Uri.parse('$HEROKU_URL$MARKET_URL/GetWorldMarketSearchList');
   final header = {
+    "X-Requested-With": "XMLHttpRequest",
     'Content-Type': 'application/json',
     'User-Agent': 'BlackDesert',
   };
