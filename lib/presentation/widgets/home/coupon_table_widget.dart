@@ -22,6 +22,7 @@ class CouponTableWidget extends StatelessWidget {
           return Center(child: Text('No data found'));
         } else {
           final List<Coupon> _couponList = snapshot.data!;
+          _couponList.sort((a,b) => a.expiry.compareTo(b.expiry));
           return Container(
             color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
             padding: const EdgeInsets.all(10),

@@ -3,18 +3,14 @@ import 'dart:async';
 import 'package:bdo_things/data/datasources/event_remote_datasource.dart';
 import 'package:bdo_things/data/repositories/event_repository_impl.dart';
 import 'package:bdo_things/domain/entities/event.dart';
-import 'package:bdo_things/domain/repositories/event_repository.dart';
 import 'package:bdo_things/domain/usecases/event_usecase.dart';
-import 'package:flutter/material.dart';
+import 'package:bdo_things/presentation/controllers/base_controller.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 
-class EventController {
-  final http.Client _client;
+class EventController extends BaseController {
   final EventUseCase _eventUseCase;
-
-  late List<List<Event>> eventDataList;
-  bool isHovering = false;
+  Future<List<Event>>? _eventListFuture;
 
   static EventController? _instance;
 
@@ -32,16 +28,21 @@ class EventController {
     return _instance!;
   }
 
+  EventController._(http.Client client, this._eventUseCase) : super(client);
+
   Future<List<Event>> getEventList() async {
+    _eventListFuture ??= _fetchEventList();
+    return await _eventListFuture!;
+  }
+
+  Future<List<Event>> _fetchEventList() async {
     try {
       final events = await _eventUseCase.fetchEvents();
       return events;
     } finally {
-      _client.close();
+      dispose();
     }
   }
-
-  EventController._(this._client, this._eventUseCase);
 
   Future<void> launchUrl(Event eventData) async {
     if (await canLaunch(eventData.url)) {

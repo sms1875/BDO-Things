@@ -1,4 +1,4 @@
-import 'package:bdo_things/presentation/controllers/home/trade_crate_calculator_controller.dart';
+import 'package:bdo_things/presentation/controllers/tools/trade_crate_calculator_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:bdo_things/data/constants.dart';
 import 'package:provider/provider.dart';

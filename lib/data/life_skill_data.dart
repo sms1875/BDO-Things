@@ -1,4 +1,4 @@
-List<Map<String, dynamic>> lifeSkillData =[
+List<Map<String, dynamic>> lifeSkillDataList =[
   {
     'name': '채집',
     'lifeSkillLevel': 1,

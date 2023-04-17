@@ -1,12 +1,14 @@
 import 'package:bdo_things/data/constants.dart';
 import 'package:bdo_things/data/datasources/design_remote_datasource.dart';
+import 'package:bdo_things/data/datasources/get_world_market_search_list_remote_datasource.dart';
 import 'package:bdo_things/data/life_skill_data.dart';
 import 'package:bdo_things/data/repositories/design_repository_impl.dart';
+import 'package:bdo_things/data/repositories/get_world_market_search_list_repository_impl.dart';
 import 'package:bdo_things/domain/entities/design.dart';
 import 'package:bdo_things/domain/usecases/design_usecase.dart';
-import 'package:bdo_things/get_world_market_search_list_api.dart';
+import 'package:bdo_things/domain/usecases/get_world_market_search_list_usecase.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 enum TradeCrateSortStatus {
@@ -18,8 +20,9 @@ enum TradeCrateSortStatus {
 class TradeCrateController extends ChangeNotifier {
   final http.Client _client;
   final DesignUseCase _designUseCase;
+  final GetWorldMarketSearchListUseCase _getWorldMarketSearchListUseCase;
 
-  TradeCrateController._(this._client, this._designUseCase);
+  TradeCrateController._(this._client, this._designUseCase, this._getWorldMarketSearchListUseCase);
 
   static TradeCrateController? _instance;
 
@@ -29,6 +32,13 @@ class TradeCrateController extends ChangeNotifier {
       DesignUseCase(
         designRepository: DesignRepositoryImpl(
           remoteDataSource: DesignRemoteDataSourceImpl(
+            client: http.Client(),
+          ),
+        ),
+      ),
+      GetWorldMarketSearchListUseCase(
+        getWorldMarketSearchListRepository: GetWorldMarketSearchListRepositoryImpl(
+          remoteDataSource: GetWorldMarketSearchListRemoteDataSourceImpl(
             client: http.Client(),
           ),
         ),
@@ -73,7 +83,7 @@ class TradeCrateController extends ChangeNotifier {
       final materials = design.materials;
       int materialsTotalPrice = 0;
       for (final material in materials) {
-        final marketPrice = await getWorldMarketSearchList(material.materialItemId);
+        final marketPrice = await _getWorldMarketSearchListUseCase.fetchGetWorldMarketSearchLists(material.materialItemId);
         materialsTotalPrice += (int.parse(marketPrice.parseResultMsg()[2]) * (material.amount)).toInt();
       }
 
@@ -120,7 +130,7 @@ class TradeCrateController extends ChangeNotifier {
   static const double bargainBonusPerTradeLevel = 0.005;
 
   int _calculateSellingPrice(int originalPrice) {
-    double bargainBonus = baseBargainBonus + lifeSkillData.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * bargainBonusPerTradeLevel;
+    double bargainBonus = baseBargainBonus + lifeSkillDataList.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * bargainBonusPerTradeLevel;
     num distanceBonus = CONSTANTS.distanceBonus[selectedOriginRoute]?[selectedDestinationRoute] ?? 0;
     int sellingPrice = ((originalPrice) * ((1+distanceBonus)*(1+bargainBonus))).toInt();
     return sellingPrice;

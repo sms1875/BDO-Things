@@ -1,12 +1,20 @@
+import 'package:bdo_things/presentation/controllers/tools/life_skill_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/data/constants.dart';
 
+const lifeSkillLevelNameMap = {
+  '초급': 0,
+  '견습': 10,
+  '숙련': 20,
+  '전문': 30,
+  '장인': 40,
+  '명장': 50,
+  '도인': 80,
+};
 
 class SettingWidget extends StatefulWidget {
-  final List<Map<String, dynamic>> lifeSkillData;
-
-  const SettingWidget({Key? key, required this.lifeSkillData}) : super(key: key);
+  const SettingWidget({Key? key}) : super(key: key);
 
   @override
   _SettingWidgetState createState() => _SettingWidgetState();
@@ -14,14 +22,12 @@ class SettingWidget extends StatefulWidget {
 
 class _SettingWidgetState extends State<SettingWidget> {
   late List<Map<String, dynamic>> lifeSkillData;
-  late int _selectedLifeSkillLevelName, _selectedLifeSkillLevel;
+  late final LifeSkillController _lifeSkillController = LifeSkillController.instance;
 
   @override
   void initState() {
     super.initState();
-    lifeSkillData = widget.lifeSkillData;
-    _selectedLifeSkillLevelName=0;
-    _selectedLifeSkillLevel=1;
+    lifeSkillData = _lifeSkillController.lifeSkillData;
   }
 
   @override
@@ -29,24 +35,9 @@ class _SettingWidgetState extends State<SettingWidget> {
     return  Wrap(
       spacing: 10.0,
       runSpacing: 10.0,
-      alignment: WrapAlignment.end,
+      alignment: WrapAlignment.center,
       children: [
-        Column(
-            children: [
-              Container(
-                color: Colors.white,
-                child: Text('마노스 장비 칸'),
-                width: 560,
-                height: 600,
-              ),
-              Container(
-                color: Colors.blue,
-                child: Text('도핑등'),
-                width: 560,
-                height: 200,
-              ),
-            ]
-        ),
+        EquipmentWidget(),
         Column(
           children: _buildLifeSkillColumn(lifeSkillData.where((data) => data['subMastery'] != null)),
         ),
@@ -85,41 +76,41 @@ class _SettingWidgetState extends State<SettingWidget> {
                       setState(() {
                         switch(newValue){
                           case '초급':
-                            _selectedLifeSkillLevelName = 0;
+                            _lifeSkillController.selectedLifeSkillLevelName = 0;
                             break;
                           case '견습':
-                            _selectedLifeSkillLevelName = 10;
+                            _lifeSkillController.selectedLifeSkillLevelName = 10;
                             break;
                           case '숙련':
-                            _selectedLifeSkillLevelName = 20;
+                            _lifeSkillController.selectedLifeSkillLevelName = 20;
                             break;
                           case '전문':
-                            _selectedLifeSkillLevelName = 30;
+                            _lifeSkillController.selectedLifeSkillLevelName = 30;
                             break;
                           case '장인':
-                            _selectedLifeSkillLevelName = 40;
+                            _lifeSkillController.selectedLifeSkillLevelName = 40;
                             break;
                           case '명장':
-                            _selectedLifeSkillLevelName = 50;
+                            _lifeSkillController.selectedLifeSkillLevelName = 50;
                             break;
                           case '도인':
-                            _selectedLifeSkillLevelName = 80;
+                            _lifeSkillController.selectedLifeSkillLevelName = 80;
                             break;
                         }
-                        _selectedLifeSkillLevel=1;
-                        data['lifeSkillLevel'] = _selectedLifeSkillLevelName + _selectedLifeSkillLevel;
+                        _lifeSkillController.selectedLifeSkillLevel=1;
+                        data['lifeSkillLevel'] = _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
                       });
-                      },
+                    },
                     items: CONSTANTS.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: DropdownButton<int>(
-                      value: _getLifeSkillLevel(data),
+                      value: getLifeSkillLevel(data),
                       onChanged: (newValue) {
                         setState(() {
-                          _selectedLifeSkillLevel=newValue!;
-                          data['lifeSkillLevel'] = _selectedLifeSkillLevelName + _selectedLifeSkillLevel;
+                          _lifeSkillController.selectedLifeSkillLevel=newValue!;
+                          data['lifeSkillLevel'] = _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
                         });
                       },
                       items: _buildIntDropdownMenuItemList(data['lifeSkillLevel']),
@@ -133,7 +124,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10.0),
                     child: Text(
-                      _getMastery(data).toString(),
+                      getMastery(data).toString(),
                       style: CONSTANTS.widgetTextStyle,
                     ),
                   ),
@@ -171,7 +162,7 @@ class _SettingWidgetState extends State<SettingWidget> {
                     Spacer(),
                     Padding(
                       padding: const EdgeInsets.only(right: 5.0),
-                      child: Text('${_getMastery(data)}',
+                      child: Text('${getMastery(data)}',
                         style: CONSTANTS.widgetTextStyle,
                       ),
                     ),
@@ -202,13 +193,11 @@ class _SettingWidgetState extends State<SettingWidget> {
 
   List<DropdownMenuItem<int>> _buildIntDropdownMenuItemList(int value) {
     return value <= 50
-          ? List.generate(10, (index) => index + 1).map(_buildIntDropdownMenuItem).toList()
+        ? List.generate(10, (index) => index + 1).map(_buildIntDropdownMenuItem).toList()
         : value <= 80
-          ? List.generate(30, (index) => index + 1).map(_buildIntDropdownMenuItem).toList()
-          : List.generate(50, (index) => index + 1).map(_buildIntDropdownMenuItem).toList();
-  }
-
-  String _getLifeSkillLevelName(Map<String, dynamic> data) {
+        ? List.generate(30, (index) => index + 1).map(_buildIntDropdownMenuItem).toList()
+        : List.generate(50, (index) => index + 1).map(_buildIntDropdownMenuItem).toList();
+  }  String _getLifeSkillLevelName(Map<String, dynamic> data) {
     int lifeSkillLevel = data['lifeSkillLevel'];
     int index = 0;
     if (lifeSkillLevel >= 10) {
@@ -229,29 +218,53 @@ class _SettingWidgetState extends State<SettingWidget> {
     return CONSTANTS.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList()[index].value!;
   }
 
-  int _getLifeSkillLevel(Map<String, dynamic> data){
-    int lifeSkillLevel = data['lifeSkillLevel'];
-    int levelThreshold = lifeSkillLevel <= 50 ? 10 : lifeSkillLevel <= 80 ? 50 : 80;
-    if (lifeSkillLevel % levelThreshold == 0) {
-      return levelThreshold;
-    }
-    else {
-      return lifeSkillLevel % levelThreshold;
-    }
+  int getLifeSkillLevel(Map<String, dynamic> data) {
+    final lifeSkillLevel = data['lifeSkillLevel'] as int;
+    final levelThreshold = lifeSkillLevel <= 50 ? 10 : lifeSkillLevel <= 80
+        ? 50
+        : 80;
+    return lifeSkillLevel % levelThreshold == 0
+        ? levelThreshold
+        : lifeSkillLevel % levelThreshold;
   }
 
-  int _getMastery(Map<String, dynamic> data) {
-    int lifeSkillLevel = data['lifeSkillLevel'];
-    int mastery;
-    if (lifeSkillLevel <= 10) {
-      mastery = lifeSkillLevel*5;
-    } else if (lifeSkillLevel <= 40) {
-      mastery = lifeSkillLevel*10 - 50;
-    } else {
-      mastery = lifeSkillLevel*5 + 150;
-    }
-    return mastery;
+  int getMastery(Map<String, dynamic> data) {
+    final lifeSkillLevel = data['lifeSkillLevel'] as int;
+    return lifeSkillLevel <= 10 ? lifeSkillLevel * 5 : lifeSkillLevel <= 40
+        ? lifeSkillLevel * 10 - 50
+        : lifeSkillLevel * 5 + 150;
   }
 
+  void updateLifeSkillLevel(Map<String, dynamic> data, String newValue) {
+    _lifeSkillController.selectedLifeSkillLevelName = lifeSkillLevelNameMap[newValue]!;
+    _lifeSkillController.selectedLifeSkillLevel = 1;
+    data['lifeSkillLevel'] =
+        _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
+  }
 }
 
+
+
+class EquipmentWidget extends StatelessWidget {
+  const EquipmentWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          color: Colors.white,
+          child: Text('마노스 장비 칸'),
+          width: 560,
+          height: 600,
+        ),
+        Container(
+          color: Colors.blue,
+          child: Text('도핑등'),
+          width: 560,
+          height: 200,
+        ),
+      ],
+    );
+  }
+}

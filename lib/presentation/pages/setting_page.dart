@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bdo_things/data/life_skill_data.dart';
 import '../widgets/setting_widget.dart';
 import '../base/base_page.dart';
 
@@ -80,10 +79,10 @@ class _SettingPageState extends State<SettingPage> with RouteAware {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: _onWillPop, // Add the onWillPop callback to the widget
+      onWillPop: _onWillPop,
       child: BasePage(
         pageTitle: SettingPage.pageTitle,
-        body: SettingWidget(lifeSkillData: lifeSkillData,),
+        body: SettingWidget(),
       ),
     );
   }

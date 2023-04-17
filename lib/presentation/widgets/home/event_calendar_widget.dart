@@ -13,22 +13,19 @@ class EventCalendarWidget extends StatefulWidget {
 
 class _EventCalendarWidgetState extends State<EventCalendarWidget> {
   final EventController _eventController = EventController.instance;
+  late final Future<List<Event>> _eventListFuture;
 
   @override
   void initState() {
     super.initState();
-    _fetchEvents();
+    _eventListFuture = _eventController.getEventList();
   }
 
-  Future<void> _fetchEvents() async {
-    await _eventController.getEventList();
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Event>>(
-      future: _eventController.getEventList(),
+      future: _eventListFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -37,7 +34,8 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget> {
         } else if (!snapshot.hasData) {
           return Center(child: Text('No data found'));
         } else {
-          final eventList = snapshot.data!;
+          final eventDataList = snapshot.data!;
+          eventDataList.sort((a,b) => b.boardno.compareTo(a.boardno));
           return SfCalendar(
             view: CalendarView.week,
             showNavigationArrow: false,
@@ -57,7 +55,7 @@ class _EventCalendarWidgetState extends State<EventCalendarWidget> {
               timeIntervalWidth: 0,
               timeRulerSize: 0,
             ),
-            dataSource: _CalendarDataSource(eventList),
+            dataSource: _CalendarDataSource(eventDataList),
           );
         }
       },

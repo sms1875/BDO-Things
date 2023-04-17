@@ -36,15 +36,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          navigatorObservers: [CommonRouteObserver()],
-          initialRoute: 'Home',
-          routes: routes(context),
-        );
-      },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: [CommonRouteObserver()],
+      initialRoute: 'Home',
+      routes: routes(context),
     );
   }
 }

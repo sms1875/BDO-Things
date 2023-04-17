@@ -15,7 +15,7 @@ class EventBannerWidget extends StatefulWidget {
 class _EventBannerWidgetState extends State<EventBannerWidget> {
   late final EventController _eventController = EventController.instance;
   late final Future<List<Event>> _eventListFuture;
-  CarouselController _carouselController = CarouselController();
+  final CarouselController _carouselController = CarouselController();
   int selectedSlideIndex = 0;
 
   @override
@@ -37,6 +37,7 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
           return Center(child: Text('No data found'));
         } else {
           final eventDataList = snapshot.data!;
+          eventDataList.sort((a,b) => b.boardno.compareTo(a.boardno));
           return Container(
               color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
               width: 300,

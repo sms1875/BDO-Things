@@ -10,63 +10,88 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    final double screenWidth = MediaQuery.of(context).size.width;
+    Widget leftWidget = Wrap(
+      direction: Axis.vertical,
       spacing: 10.0,
-      runSpacing: 10.0,
-      alignment: WrapAlignment.end,
       children: [
-        Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child:
-              Column(
-                children: [
-                  SizedBox(
-                    height: 200,
-                    width: 300,
-                    child: CouponTableWidget(),
-                  ),
-                  SizedBox(height: 10),
-                  EventBannerWidget(),
-                  SizedBox(height: 10),
-                  EventCalendarWidget(),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: Text('중앙 배너'),
-                    height: 600,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                children: [
-                  Container(
-                    color: Colors.green,
-                    child: Text('오른쪽 배너'),
-                    height: 300,
-                  ),
-                  SizedBox(height: 10),
-                  Container(
-                    color: Colors.white,
-                    child: Text('오른쪽 아래 배너'),
-                    height: 300,
-                  ),
-                ],
-              ),
-            ),
-          ],
+        Container(
+          color: Colors.green,
+          child: Text('왼쪽 배너'),
+          height: 400,
+          width: 300,
+        ),
+        Container(
+          color: Colors.white,
+          child: Text('왼쪽 아래 배너'),
+          height: 300,
+          width: 300,
         ),
       ],
     );
+
+    Widget centerWidget = Wrap(
+      direction: Axis.vertical,
+      spacing: 10.0,
+      children: [
+        Container(
+          color: Colors.white,
+          child: Text('중앙 배너'),
+          height: 600,
+          width: 600,
+        ),
+        Container(
+          color: Colors.white,
+          child: Text('중앙 아래 배너'),
+          height: 600,
+          width: 600,
+        ),
+      ],
+    );
+
+    Widget rightWidget = Wrap(
+      direction: Axis.vertical,
+      spacing: 10.0,
+      children: [
+        SizedBox(
+          height: 200,
+          width: 300,
+          child: CouponTableWidget(),
+        ),
+        EventBannerWidget(),
+        SizedBox(
+          width: 300,
+          child: EventCalendarWidget(),
+        ),
+      ],
+    );
+
+    if (screenWidth <= 1200) {
+      return Column(
+        children: [
+          centerWidget,
+          leftWidget,
+          rightWidget,
+        ],
+      );
+    } else {
+      return Wrap(
+        spacing: 10.0,
+        runSpacing: 10.0,
+        alignment: WrapAlignment.center,
+        children: [
+          Wrap(
+            direction: Axis.horizontal,
+            spacing: 10.0,
+            runAlignment: WrapAlignment.start,
+            children: [
+              leftWidget,
+              centerWidget,
+              rightWidget,
+            ],
+          ),
+        ],
+      );
+    }
   }
 }
