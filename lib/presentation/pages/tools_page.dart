@@ -12,7 +12,7 @@ class ToolsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePage(
       pageTitle: ToolsPage.pageTitle,
-      body: ToolsWidget(toolData: toolData),
+      body: ToolsWidget(),
     );
   }
 }

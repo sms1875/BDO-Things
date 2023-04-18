@@ -15,56 +15,37 @@ class BasePage extends StatefulWidget {
 
 class BasePageState extends State<BasePage> {
   String get pageTitle => widget.pageTitle;
-  Widget get body => widget.body;
+  Widget get pageBody => widget.body;
 
   @override
   Widget build(BuildContext context) {
+    final bool isDesktop = (MediaQuery.of(context).size.width >= 1200);
+
     return Scaffold(
-      backgroundColor: CONSTANTS.backgroundColor,
+      backgroundColor: CONSTANTS.BACKGROUNDCOLOR,
       appBar: const CustomAppBar(),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          if (constraints.maxWidth >= 1200) {
-            return Row(
-              children: <Widget>[
-                CustomNavigationRail(),
-                Divider(thickness: 1, height: 1),
-                // This is the main content.
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Text(
-                              pageTitle,
-                              style: CONSTANTS.pageTitleTextStyle,
-                            ),
-                          ),
-                          body,
-                        ],
-                      );
-                    },
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    pageTitle,
-                    style: CONSTANTS.pageTitleTextStyle,
-                  ),
-                ),
-                body,
-              ],
-            );
-          }
+          return Row(
+            children: <Widget>[
+              isDesktop ? const CustomNavigationRail():SizedBox()  ,
+              const VerticalDivider(thickness: 1, width: 1),
+              Expanded(
+                  child:ListView(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          pageTitle,
+                          style: CONSTANTS.pageTitleTextStyle,
+                        ),
+                      ),
+                      pageBody,
+                    ],
+                  )
+              ),
+            ],
+          );
         },
       ),
     );

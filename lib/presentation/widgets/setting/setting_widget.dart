@@ -1,27 +1,24 @@
+import 'package:bdo_things/presentation/widgets/setting/life_skill_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/data/constants.dart';
-import 'trade_crate_calculator_widget.dart';
 
-List<Map<String, String>> toolData = [
-  {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
-  {'name': '예비1', 'image': 'tradeCrate', 'page': 'Test1'},
-  {'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
+List<Map<String, String>> SettingMenuData = [
+  {'name': '가문', 'image': 'tradeCrate', 'page': 'test1'},
+  {'name': '생활', 'image': 'tradeCrate', 'page': 'LifeSkill'},
+  {'name': '예비', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
-class ToolsWidget extends StatefulWidget {
-  const ToolsWidget({
-    Key? key,
-  }) : super(key: key);
-
+class SettingWidget extends StatefulWidget {
+  const SettingWidget({Key? key}) : super(key: key);
 
   @override
-  _ToolsWidgetState createState() => _ToolsWidgetState();
+  _SettingWidgetState createState() => _SettingWidgetState();
 }
 
-class _ToolsWidgetState extends State<ToolsWidget> {
-  final List<Map<String, String>> _toolData = toolData;
+class _SettingWidgetState extends State<SettingWidget> {
   Widget _currentWidget = SizedBox();
+  List<Map<String, String>> _settingMenuData = SettingMenuData;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class _ToolsWidgetState extends State<ToolsWidget> {
         Wrap(
           spacing: 16.0,
           runSpacing: 16.0,
-          children: _buildToolWidgetList(context),
+          children: _buildSettingMenuWidgetList(context),
         ),
         SizedBox(height: 16.0),
         _currentWidget,
@@ -38,18 +35,13 @@ class _ToolsWidgetState extends State<ToolsWidget> {
     );
   }
 
-  List<Widget> _buildToolWidgetList(BuildContext context) {
-    return _toolData
-        .map((data) => ToolItem(data: data, onTap: () => _onToolItemTap(data)))
+  List<Widget> _buildSettingMenuWidgetList(BuildContext context) {
+    return _settingMenuData
+        .map((data) => SettingMenuItem(data: data, onTap: () => _onSettingMenuItemTap(data)))
         .toList();
   }
-  void _onToolItemTap(Map<String, String> data) {
+  void _onSettingMenuItemTap(Map<String, String> data) {
     switch (data['page']) {
-      case 'Trade_crate':
-        setState(() {
-          _currentWidget = TradeCrateCalculatorWidget();
-        });
-        break;
       case 'Test1':
         setState(() {
           _currentWidget = Container(
@@ -58,6 +50,11 @@ class _ToolsWidgetState extends State<ToolsWidget> {
             height: 600,
             child: Text('test1'),
           );
+        });
+        break;
+      case 'LifeSkill':
+        setState(() {
+          _currentWidget = LifeSkillWidget();
         });
         break;
       case 'Test2':
@@ -79,8 +76,8 @@ class _ToolsWidgetState extends State<ToolsWidget> {
 
 }
 
-class ToolItem extends StatelessWidget {
-  const ToolItem({
+class SettingMenuItem extends StatelessWidget {
+  const SettingMenuItem({
     Key? key,
     required this.data,
     required this.onTap,
@@ -100,7 +97,7 @@ class ToolItem extends StatelessWidget {
         color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
         child: Row(
           children: [
-            _buildToolImage(data['image']),
+            _buildSettingMenuImage(data['image']),
             const SizedBox(width: 16.0),
             Expanded(
               child: Text(
@@ -115,7 +112,7 @@ class ToolItem extends StatelessWidget {
     );
   }
 
-  Widget _buildToolImage(String? imageName) {
+  Widget _buildSettingMenuImage(String? imageName) {
     return Container(
       width: 50,
       height: 50,

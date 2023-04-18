@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CONSTANTS {
-  static const backgroundColor = Color.fromRGBO(40, 40, 40, 1);
+  static const BACKGROUNDCOLOR = Color.fromRGBO(40, 40, 40, 1);
   static const WIDGET_BACKGROUND_COLOR = Color.fromRGBO(60, 60, 60, 1);
   static const pagePadding = EdgeInsets.symmetric(horizontal: 20, vertical: 10);
 

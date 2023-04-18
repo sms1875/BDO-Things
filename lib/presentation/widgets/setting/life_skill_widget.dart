@@ -1,7 +1,6 @@
+import 'package:bdo_things/data/constants.dart';
 import 'package:bdo_things/presentation/controllers/tools/life_skill_controller.dart';
 import 'package:flutter/material.dart';
-
-import 'package:bdo_things/data/constants.dart';
 
 const lifeSkillLevelNameMap = {
   '초급': 0,
@@ -13,14 +12,14 @@ const lifeSkillLevelNameMap = {
   '도인': 80,
 };
 
-class SettingWidget extends StatefulWidget {
-  const SettingWidget({Key? key}) : super(key: key);
+class LifeSkillWidget extends StatefulWidget {
+  const LifeSkillWidget({super.key});
 
   @override
-  _SettingWidgetState createState() => _SettingWidgetState();
+  _LifeSkillWidgetState createState() => _LifeSkillWidgetState();
 }
 
-class _SettingWidgetState extends State<SettingWidget> {
+class _LifeSkillWidgetState extends State<LifeSkillWidget> {
   late List<Map<String, dynamic>> lifeSkillData;
   late final LifeSkillController _lifeSkillController = LifeSkillController.instance;
 
@@ -32,12 +31,15 @@ class _SettingWidgetState extends State<SettingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return  Wrap(
-      spacing: 10.0,
-      runSpacing: 10.0,
-      alignment: WrapAlignment.center,
+    return Wrap(
       children: [
-        EquipmentWidget(),
+        Column(
+          children: [
+            ManosAccessorieWidget(),
+            LifeSkillBuffWidget(),
+          ],
+        ),
+
         Column(
           children: _buildLifeSkillColumn(lifeSkillData.where((data) => data['subMastery'] != null)),
         ),
@@ -47,6 +49,8 @@ class _SettingWidgetState extends State<SettingWidget> {
       ],
     );
   }
+
+
 
   List<Widget> _buildLifeSkillColumn(Iterable<Map<String, dynamic>> lifeSkillData) {
     final widgetList = <Widget>[];
@@ -243,10 +247,8 @@ class _SettingWidgetState extends State<SettingWidget> {
   }
 }
 
-
-
-class EquipmentWidget extends StatelessWidget {
-  const EquipmentWidget({Key? key}) : super(key: key);
+class ManosAccessorieWidget extends StatelessWidget {
+  const ManosAccessorieWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -258,9 +260,21 @@ class EquipmentWidget extends StatelessWidget {
           width: 560,
           height: 600,
         ),
+      ],
+    );
+  }
+}
+
+class LifeSkillBuffWidget extends StatelessWidget {
+  const LifeSkillBuffWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         Container(
           color: Colors.blue,
-          child: Text('도핑등'),
+          child: Text('도핑'),
           width: 560,
           height: 200,
         ),

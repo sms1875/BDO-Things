@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
-      backgroundColor: CONSTANTS.backgroundColor,
+      backgroundColor: CONSTANTS.BACKGROUNDCOLOR,
       elevation: 2,
       centerTitle: true,
       titleSpacing: 0,

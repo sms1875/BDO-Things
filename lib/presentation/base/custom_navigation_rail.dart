@@ -40,7 +40,7 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
   @override
   Widget build(BuildContext context) {
     return NavigationRail(
-      backgroundColor: CONSTANTS.backgroundColor,
+      backgroundColor: CONSTANTS.BACKGROUNDCOLOR,
       selectedIndex: _selectedIndex,
       groupAlignment: groupAligment,
       labelType: labelType,

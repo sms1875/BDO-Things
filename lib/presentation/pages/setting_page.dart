@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../widgets/setting_widget.dart';
+import '../widgets/setting/setting_widget.dart';
 import '../base/base_page.dart';
 
 class SettingPage extends StatefulWidget {
