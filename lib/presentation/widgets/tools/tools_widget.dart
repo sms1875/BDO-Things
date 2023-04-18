@@ -1,3 +1,4 @@
+import 'package:bdo_things/presentation/widgets/tools/scroll_calculator_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/data/constants.dart';
@@ -5,7 +6,7 @@ import 'trade_crate_calculator_widget.dart';
 
 List<Map<String, String>> toolData = [
   {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
-  {'name': '예비1', 'image': 'tradeCrate', 'page': 'Test1'},
+  {'name': '소환서 계산기', 'image': '고유결이미지', 'page': 'Scroll_calculator'},
   {'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
@@ -50,14 +51,9 @@ class _ToolsWidgetState extends State<ToolsWidget> {
           _currentWidget = TradeCrateCalculatorWidget();
         });
         break;
-      case 'Test1':
+      case 'Scroll_calculator':
         setState(() {
-          _currentWidget = Container(
-            color: Colors.white,
-            width: 560,
-            height: 600,
-            child: Text('test1'),
-          );
+          _currentWidget = ScrollCalculatorWidget();
         });
         break;
       case 'Test2':

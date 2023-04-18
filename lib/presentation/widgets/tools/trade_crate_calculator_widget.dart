@@ -10,7 +10,6 @@ class TradeCrateCalculatorWidget extends StatefulWidget {
   _TradeCrateCalculatorWidgetState createState() => _TradeCrateCalculatorWidgetState();
 }
 
-
 class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget> {
   final TradeCrateController _controller = TradeCrateController.instance;
 
