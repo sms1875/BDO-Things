@@ -16,8 +16,8 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   final DesignRepository _designRepository= DesignRepository();
   final GetWorldMarketSearchListRepository _getWorldMarketSearchListRepository = GetWorldMarketSearchListRepository();
 
-  List<Design>  _designList = [];
-  List<Design> get couponList => _designList;
+  List<Design>  _designs = [];
+  List<Design> get designs => _designs;
 
   List<Map<String, dynamic>> _tradeCrateData = [];
   List<Map<String, dynamic>> get tradeCrateData => _tradeCrateData;
@@ -48,7 +48,7 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   Future<void> update() async {
     setLoading(true);
     try {
-      _designList = await _designRepository.getDesigns();
+      _designs = await _designRepository.getDesigns();
     } catch (e) {
       setError(e);
     }
@@ -80,11 +80,11 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
 
   Future<void> loadTableData() async {
     setLoading(true);
-    _tradeCrateData = await Future.wait(couponList.map((design) async {
+    _tradeCrateData = await Future.wait(designs.map((design) async {
       final materials = design.materials;
       int materialsTotalPrice = 0;
       for (final material in materials) {
-        final marketPrice =  await _getWorldMarketSearchListRepository.getWorldMarketSearchLists(material.materialItemId);
+        final marketPrice =  await _getWorldMarketSearchListRepository.getWorldMarketSearchLists(material.materialItemId.toString());
         materialsTotalPrice += (int.parse(marketPrice.parseResultMsg()[2]) * (material.amount)).toInt();
       }
 
@@ -105,7 +105,7 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
 
   void calculateSellingPriceAndProfit() {
     for (final data in _tradeCrateData) {
-      final originalPrice = couponList.firstWhere((element) => element.id == data['id']).originalPrice;
+      final originalPrice = designs.firstWhere((element) => element.id == data['id']).originalPrice;
       data['sale_price'] = _calculateSellingPrice(originalPrice);
       data['profit'] = data['sale_price'] - data['materialsTotalPrice'];
     }
