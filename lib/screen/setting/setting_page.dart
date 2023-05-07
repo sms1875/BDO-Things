@@ -1,6 +1,6 @@
+import 'package:bdo_things/screen/base/base_page.dart';
 import 'package:flutter/material.dart';
-import 'setting_widget.dart';
-import '../../base/base_page.dart';
+import 'widgets/setting_widget.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);

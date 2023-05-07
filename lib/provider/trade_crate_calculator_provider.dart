@@ -73,6 +73,8 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   }
 
   Future<void> loadTableData() async {
+
+    print('1');
     final designList = couponList;
 
     final dataWithMaterials = await Future.wait(designList.map((design) async {

@@ -1,6 +1,6 @@
 import 'package:bdo_things/screen/base/base_widget.dart';
-import 'package:bdo_things/screen/widgets/home/event_banner_widget.dart';
-import 'package:bdo_things/screen/widgets/home/event_calendar_widget.dart';
+import 'package:bdo_things/screen/home/widgets/event_banner_widget.dart';
+import 'package:bdo_things/screen/home/widgets/event_calendar_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'coupon_table_widget.dart';

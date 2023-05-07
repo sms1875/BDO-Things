@@ -1,5 +1,5 @@
 import 'package:bdo_things/screen/base/base_page.dart';
-import 'package:bdo_things/screen/widgets/home/home_widget.dart';
+import 'package:bdo_things/screen/home/widgets/home_widget.dart';
 import 'package:flutter/material.dart';
 
 

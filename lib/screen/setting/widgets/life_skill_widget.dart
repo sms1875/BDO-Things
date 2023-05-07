@@ -1,5 +1,5 @@
 import 'package:bdo_things/constants.dart';
-import 'package:bdo_things/screen/widgets/setting/life_skill_controller.dart';
+import 'package:bdo_things/screen/setting/life_skill_controller.dart';
 import 'package:flutter/material.dart';
 
 const lifeSkillLevelNameMap = {

@@ -1,24 +1,28 @@
-import 'package:bdo_things/screen/widgets/setting/life_skill_widget.dart';
+import 'package:bdo_things/screen/tools/widgets/scroll_calculator_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/constants.dart';
+import 'trade_crate_calculator_widget.dart';
 
-List<Map<String, String>> SettingMenuData = [
-  {'name': '가문', 'image': 'tradeCrate', 'page': 'test1'},
-  {'name': '생활', 'image': 'tradeCrate', 'page': 'LifeSkill'},
-  {'name': '예비', 'image': 'tradeCrate', 'page': 'Test2'},
+List<Map<String, String>> toolData = [
+  {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
+  {'name': '소환서 계산기', 'image': '고유결이미지', 'page': 'Scroll_calculator'},
+  {'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
-class SettingWidget extends StatefulWidget {
-  const SettingWidget({Key? key}) : super(key: key);
+class ToolsWidget extends StatefulWidget {
+  const ToolsWidget({
+    Key? key,
+  }) : super(key: key);
+
 
   @override
-  _SettingWidgetState createState() => _SettingWidgetState();
+  _ToolsWidgetState createState() => _ToolsWidgetState();
 }
 
-class _SettingWidgetState extends State<SettingWidget> {
+class _ToolsWidgetState extends State<ToolsWidget> {
+  final List<Map<String, String>> _toolData = toolData;
   Widget _currentWidget = SizedBox();
-  final List<Map<String, String>> _settingMenuData = SettingMenuData;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +31,7 @@ class _SettingWidgetState extends State<SettingWidget> {
         Wrap(
           spacing: 16.0,
           runSpacing: 16.0,
-          children: _buildSettingMenuWidgetList(context),
+          children: _buildToolWidgetList(context),
         ),
         SizedBox(height: 16.0),
         _currentWidget,
@@ -35,28 +39,21 @@ class _SettingWidgetState extends State<SettingWidget> {
     );
   }
 
-  List<Widget> _buildSettingMenuWidgetList(BuildContext context) {
-    return _settingMenuData
-        .map((data) => SettingMenuItem(
-            data: data, onTap: () => _onSettingMenuItemTap(data)))
+  List<Widget> _buildToolWidgetList(BuildContext context) {
+    return _toolData
+        .map((data) => ToolItem(data: data, onTap: () => _onToolItemTap(data)))
         .toList();
   }
-
-  void _onSettingMenuItemTap(Map<String, String> data) {
+  void _onToolItemTap(Map<String, String> data) {
     switch (data['page']) {
-      case 'Test1':
+      case 'Trade_crate':
         setState(() {
-          _currentWidget = Container(
-            color: Colors.white,
-            width: 560,
-            height: 600,
-            child: Text('test1'),
-          );
+          _currentWidget = TradeCrateCalculatorWidget();
         });
         break;
-      case 'LifeSkill':
+      case 'Scroll_calculator':
         setState(() {
-          _currentWidget = LifeSkillWidget();
+          _currentWidget = ScrollCalculatorWidget();
         });
         break;
       case 'Test2':
@@ -75,10 +72,11 @@ class _SettingWidgetState extends State<SettingWidget> {
         });
     }
   }
+
 }
 
-class SettingMenuItem extends StatelessWidget {
-  const SettingMenuItem({
+class ToolItem extends StatelessWidget {
+  const ToolItem({
     Key? key,
     required this.data,
     required this.onTap,
@@ -98,7 +96,7 @@ class SettingMenuItem extends StatelessWidget {
         color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
         child: Row(
           children: [
-            _buildSettingMenuImage(data['image']),
+            _buildToolImage(data['image']),
             const SizedBox(width: 16.0),
             Expanded(
               child: Text(
@@ -113,16 +111,16 @@ class SettingMenuItem extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingMenuImage(String? imageName) {
+  Widget _buildToolImage(String? imageName) {
     return Container(
       width: 50,
       height: 50,
       decoration: BoxDecoration(
-          // image: DecorationImage(
-          //   image: AssetImage('images/$imageName.png'),
-          //   fit: BoxFit.fitWidth,
-          // ),
-          ),
+        // image: DecorationImage(
+        //   image: AssetImage('images/$imageName.png'),
+        //   fit: BoxFit.fitWidth,
+        // ),
+      ),
     );
   }
 }
