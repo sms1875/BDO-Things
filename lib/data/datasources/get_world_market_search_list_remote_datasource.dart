@@ -10,7 +10,7 @@ abstract class GetWorldMarketSearchListRemoteDataSource {
 }
 
 class GetWorldMarketSearchListRemoteDataSourceImpl implements GetWorldMarketSearchListRemoteDataSource {
-  String HEROKU_URL = 'https://cors-anywhere.herokuapp.com/';
+  String PROXY_URL = 'https://cors-anywhere.fly.dev/';
   String MARKET_URL = 'https://trade.kr.playblackdesert.com/Trademarket';
 
   final http.Client client;
@@ -19,7 +19,7 @@ class GetWorldMarketSearchListRemoteDataSourceImpl implements GetWorldMarketSear
 
   @override
   Future<GetWorldMarketSearchList> getWorldMarketSearchLists(String searchResult) async {
-    final url = Uri.parse('$HEROKU_URL$MARKET_URL/GetWorldMarketSearchList');
+    final url = Uri.parse('$PROXY_URL$MARKET_URL/GetWorldMarketSearchList');
     final header = {
       "X-Requested-With": "XMLHttpRequest",
       'Content-Type': 'application/json',

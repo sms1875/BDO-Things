@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
     return BasePage(
       pageTitle: HomePage.pageTitle,
       body: HomeWidget(),
+
     );
   }
 }
