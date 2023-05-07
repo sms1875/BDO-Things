@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             create: (_) => CouponProvider()..update()
         ),
         ChangeNotifierProvider(
-            create: (_) => TradeCrateCalculatorProvider()..update()
+            create: (_) => TradeCrateCalculatorProvider()
         ),
         ChangeNotifierProvider(
             create: (_) => EventProvider()..update()
