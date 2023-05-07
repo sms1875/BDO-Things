@@ -1,5 +1,5 @@
 import 'package:bdo_things/constants.dart';
-import 'package:bdo_things/repository/design_remote_datasource.dart';
+import 'package:bdo_things/repository/design_repository.dart';
 import 'package:bdo_things/repository/get_world_market_search_list_repository.dart';
 import 'package:bdo_things/data/life_skill_data.dart';
 import 'package:bdo_things/data/design.dart';

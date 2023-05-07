@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bdo_things/repository/event_remote_datasource.dart';
+import 'package:bdo_things/repository/event_repository.dart';
 import 'package:bdo_things/data/event.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,6 +17,10 @@ class EventProvider extends ChangeNotifier {
     final error=_error;
     _error= null;
     return error;
+  }
+
+  EventProvider() {
+    update();
   }
 
   Future<void> update() async {

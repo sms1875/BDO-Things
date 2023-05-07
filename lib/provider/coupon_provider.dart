@@ -17,6 +17,10 @@ class CouponProvider extends ChangeNotifier  {
     return error;
   }
 
+  CouponProvider() {
+    update();
+  }
+
   Future<void> update() async {
     setLoading(true);
     try {
