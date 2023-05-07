@@ -16,8 +16,9 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   Widget build(BuildContext context) {
     return Consumer<TradeCrateCalculatorProvider>(
       builder: (context, controller, child) {
-        controller.loadTableData();
-        return Column(
+        return controller.isLoading?
+        CircularProgressIndicator() :
+        Column(
           children: [
             DropdownWidget(
                controller.originRoute,
@@ -26,7 +27,6 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
                (value) {
                 setState(() {
                   controller.setOriginRoute(value!);
-                  controller.loadTableData();
                 });
               },
             ),
@@ -38,7 +38,6 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
              (value) {
                 setState(() {
                   controller.setDestinationRoute(value!);
-                  controller.loadTableData();
                 });
               },
             ),
@@ -47,7 +46,7 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
               child: TableWidget(
                  controller.tradeCrateData,
                  controller.sortStatus,
-                 controller.sortTableData,
+                 controller.changeSortStatus,
               ),
             ),
             Container(
