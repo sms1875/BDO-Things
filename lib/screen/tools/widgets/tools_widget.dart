@@ -116,10 +116,10 @@ class ToolItem extends StatelessWidget {
       width: 50,
       height: 50,
       decoration: BoxDecoration(
-        // image: DecorationImage(
-        //   image: AssetImage('images/$imageName.png'),
-        //   fit: BoxFit.fitWidth,
-        // ),
+         image: DecorationImage(
+           image: AssetImage('images/icon/tradeCrate.png'),
+           fit: BoxFit.fitWidth,
+         ),
       ),
     );
   }

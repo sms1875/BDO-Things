@@ -63,17 +63,24 @@ class _LifeSkillWidgetState extends State<LifeSkillWidget> {
             width: 540,
             height: 70,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+              padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Text('icon'),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('images/icon/${data['name']}.png'),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Text(data['name'], style: CONSTANTS.widgetTextStyle),
-                  ),
+                  SizedBox(width: 8.0),
+                  Text(data['name'], style: CONSTANTS.widgetTextStyle),
+                  SizedBox(width: 8.0),
                   DropdownButton<String>(
                     value: _getLifeSkillLevelName(data),
                     onChanged: (newValue) {
@@ -104,33 +111,24 @@ class _LifeSkillWidgetState extends State<LifeSkillWidget> {
                         _lifeSkillController.selectedLifeSkillLevel=1;
                         data['lifeSkillLevel'] = _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
                       });
-                    },
+                      },
                     items: CONSTANTS.lifeSkillLevels.map(_buildStringDropdownMenuItem).toList(),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: DropdownButton<int>(
-                      value: getLifeSkillLevel(data),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _lifeSkillController.selectedLifeSkillLevel=newValue!;
-                          data['lifeSkillLevel'] = _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
-                        });
-                      },
-                      items: _buildIntDropdownMenuItemList(data['lifeSkillLevel']),
-                    ),
+                  SizedBox(width: 8.0),
+                  DropdownButton<int>(
+                    value: getLifeSkillLevel(data),
+                    onChanged: (newValue) {
+                      setState(() {
+                        _lifeSkillController.selectedLifeSkillLevel=newValue!;
+                        data['lifeSkillLevel'] = _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
+                      });
+                    },
+                    items: _buildIntDropdownMenuItemList(data['lifeSkillLevel']),
                   ),
                   Spacer(),
                   Text(
-                    '숙련도',
+                    'Mastery  ${getMastery(data)}',
                     style: CONSTANTS.widgetTextStyle,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0),
-                    child: Text(
-                      getMastery(data).toString(),
-                      style: CONSTANTS.widgetTextStyle,
-                    ),
                   ),
                 ],
               ),

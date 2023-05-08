@@ -1,6 +1,6 @@
 List<Map<String, dynamic>> lifeSkillDataList =[
   {
-    'name': '채집',
+    'name': 'Gathering',
     'lifeSkillLevel': 1,
     'mastery': 0,
     'subMastery':[
@@ -14,7 +14,7 @@ List<Map<String, dynamic>> lifeSkillDataList =[
     ]
   },
   {
-    'name': '가공',
+    'name': 'Processing',
     'lifeSkillLevel': 11,
     'mastery': 0,
     'subMastery':[
@@ -27,47 +27,47 @@ List<Map<String, dynamic>> lifeSkillDataList =[
     ]
   },
   {
-    'name': '낚시',
+    'name': 'Fishing',
     'lifeSkillLevel': 22,
     'mastery': 0,
   },
   {
-    'name': '수렵',
+    'name': 'Hunting',
     'lifeSkillLevel': 33,
     'mastery': 0,
   },
   {
-    'name': '요리',
+    'name': 'Cooking',
     'lifeSkillLevel': 44,
     'mastery': 0,
   },
   {
-    'name': '연금',
+    'name': 'Alchemy',
     'lifeSkillLevel': 55,
     'mastery': 0,
   },
   {
-    'name': '조련',
+    'name': 'Training',
     'lifeSkillLevel': 66,
     'mastery': 0,
   },
   {
-    'name': '무역',
+    'name': 'Trading',
     'lifeSkillLevel': 60,
     'mastery': 0,
   },
   {
-    'name': '재배',
+    'name': 'Farming',
     'lifeSkillLevel': 88,
     'mastery': 0,
   },
   {
-    'name': '항해',
+    'name': 'Sailing',
     'lifeSkillLevel': 99,
     'mastery': 0,
   },
   {
-    'name': '교역',
+    'name': 'Bartering',
     'lifeSkillLevel': 100,
     'mastery': 0,
   },
