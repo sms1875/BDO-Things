@@ -15,38 +15,39 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   @override
   Widget build(BuildContext context) {
     return Consumer<TradeCrateCalculatorProvider>(
-      builder: (context, controller, child) {
-        return controller.isLoading?
+      builder: (context, provider, child) {
+        provider.calculateSellingPriceAndProfit();
+        return provider.isLoading?
         CircularProgressIndicator() :
         Column(
           children: [
             DropdownWidget(
-               controller.originRoute,
-               CONSTANTS.originRoutes,
-               '원산지',
-               (value) {
+              provider.originRoute,
+              CONSTANTS.originRoutes,
+              '원산지',
+                  (value) {
                 setState(() {
-                  controller.setOriginRoute(value!);
+                  provider.setOriginRoute(value!);
                 });
               },
             ),
             SizedBox(width: 20),
             DropdownWidget(
-               controller.destinationRoute,
-               CONSTANTS.destinationRoutes,
+              provider.destinationRoute,
+              CONSTANTS.destinationRoutes,
               '판매지',
-             (value) {
+                  (value) {
                 setState(() {
-                  controller.setDestinationRoute(value!);
+                  provider.setDestinationRoute(value!);
                 });
               },
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: TableWidget(
-                 controller.tradeCrateData,
-                 controller.sortStatus,
-                 controller.changeSortStatus,
+                provider.tradeCrateData,
+                provider.sortStatus,
+                provider.changeSortStatus,
               ),
             ),
             Container(
@@ -108,15 +109,18 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   }
 
   DataRow _buildDataRow(data) {
+    print(data);
     return DataRow(
       cells: [
         DataCell(
-          SizedBox(
+          Container(
             width: 40,
             height: 40,
-            child: Center(
-                child: SizedBox()
-              //Image.network('https://bdocodex.com/items/new_icon/03_etc/07_productmaterial/${data['id'].padLeft(8, '0')}.webp',),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('images/icon/design_crate/${data['id']}.webp'),
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
         ),

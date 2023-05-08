@@ -1,15 +1,10 @@
 import 'dart:convert';
-
-import 'package:bdo_things/constants.dart';
 import 'package:bdo_things/data/design.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 
 
 
 class DesignRepository {
-  static const String FIRESTORE_URL = CONSTANTS.FIRESTORE_URL;
-  static const String _designEndpoint = '/design';
   Future<List<Design>> getDesigns() async {
     try {
       final String designJson = await rootBundle.loadString('json/design_crate.json');
@@ -25,6 +20,8 @@ class DesignRepository {
     }
   }
   /*
+  static const String FIRESTORE_URL = CONSTANTS.FIRESTORE_URL;
+  static const String _designEndpoint = '/design';
   Future<List<Design>> getDesigns() async {
     try {
       final response = await http.get(Uri.parse(FIRESTORE_URL + _designEndpoint));
