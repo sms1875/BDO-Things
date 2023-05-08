@@ -14,8 +14,8 @@ class GetWorldMarketSearchList {
     );
   }
 
-  List<String> parseResultMsg() {
-    return resultMsg.split('-');
+  String parseResultMsg() {
+    return resultMsg;
   }
 // ID, Current stock, Base price, Total Price
 }

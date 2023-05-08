@@ -82,10 +82,15 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
     setLoading(true);
     _tradeCrateData = await Future.wait(designs.map((design) async {
       final materials = design.materials;
+      final materialItemIdString = materials.map((material) => material.materialItemId.toString()).join(',');
+
+      final marketPrice = await _getWorldMarketSearchListRepository.getWorldMarketSearchLists(materialItemIdString);
+      final marketPriceList = marketPrice.parseResultMsg().split('|');
+
       int materialsTotalPrice = 0;
-      for (final material in materials) {
-        final marketPrice =  await _getWorldMarketSearchListRepository.getWorldMarketSearchLists(material.materialItemId.toString());
-        materialsTotalPrice += (int.parse(marketPrice.parseResultMsg()[2]) * (material.amount)).toInt();
+      for (int i = 0; i < materials.length; i++) {
+        final material = materials[i];
+        materialsTotalPrice += (int.parse(marketPriceList[i].split('-')[2]) * material.amount).toInt();
       }
 
       return {
@@ -139,8 +144,7 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   int _calculateSellingPrice(int originalPrice) {
     const double defaultBonus = 0.05;
     const double tradeLevelBounusMultiplier = 0.005;
-
-    double tradeLevelBounus = defaultBonus + lifeSkillDataList.firstWhere((data) => data['name'] == '무역')['lifeSkillLevel'] * tradeLevelBounusMultiplier;
+    double tradeLevelBounus = defaultBonus + lifeSkillDataList.firstWhere((data) => data['name'] == 'Trading')['lifeSkillLevel'] * tradeLevelBounusMultiplier;
     num distanceBonus = CONSTANTS.distanceBonus[_originRoute]?[_destinationRoute] ?? 0;
     int sellingPrice = ((originalPrice) * ((1+distanceBonus)*(1+tradeLevelBounus))).toInt();
     return sellingPrice;
