@@ -44590,7 +44590,7 @@ return new A.HA(r,60,60,q,A.aB8(r),s)},
 ZY(a){var s,r=null
 A.no(a)
 s=J.a0(a)
-return new A.kq(A.a([A.Hz(A.aW(r,r,B.i,r,r,new A.d2(r,A.wz(B.fG,new A.lM("images/icon/design_crate/"+A.j(s.j(a,"id"))+".webp")),r,r,r,r,B.ar),40,r,r,40)),A.Hz(A.bY(s.j(a,"name"),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"materialsTotalPrice")),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"sale_price")),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"profit")),r,r,r,r,r,r,r,r))],t.sa))}}
+return new A.kq(A.a([A.Hz(A.aW(r,r,B.i,r,r,new A.d2(r,A.wz(B.fG,new A.lM("assets/images/icon/design_crate/"+A.j(s.j(a,"id"))+".webp")),r,r,r,r,B.ar),40,r,r,40)),A.Hz(A.bY(s.j(a,"name"),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"materialsTotalPrice")),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"sale_price")),r,r,r,r,r,r,r,r)),A.Hz(A.bY(J.dD(s.j(a,"profit")),r,r,r,r,r,r,r,r))],t.sa))}}
 A.ajX.prototype={
 $3(a,b,c){var s,r=null
 b.D1()
