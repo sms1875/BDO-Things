@@ -42,4 +42,14 @@ class CONSTANTS {
   };
 
   static const List<String> lifeSkillLevels = ['초급', '견습', '숙련','전문', '장인','명장','도인'];
+
+  static const lifeSkillLevelNameMap = {
+    '초급': 0,
+    '견습': 10,
+    '숙련': 20,
+    '전문': 30,
+    '장인': 40,
+    '명장': 50,
+    '도인': 80,
+  };
 }

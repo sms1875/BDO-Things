@@ -21,7 +21,7 @@ class LifeSkillWidget extends StatefulWidget {
 
 class _LifeSkillWidgetState extends State<LifeSkillWidget> {
   late List<Map<String, dynamic>> lifeSkillData;
-  late final LifeSkillController _lifeSkillController = LifeSkillController.instance;
+  late final LifeSkillProvider _lifeSkillController = LifeSkillProvider.instance;
 
   @override
   void initState() {
@@ -235,13 +235,6 @@ class _LifeSkillWidgetState extends State<LifeSkillWidget> {
     return lifeSkillLevel <= 10 ? lifeSkillLevel * 5 : lifeSkillLevel <= 40
         ? lifeSkillLevel * 10 - 50
         : lifeSkillLevel * 5 + 150;
-  }
-
-  void updateLifeSkillLevel(Map<String, dynamic> data, String newValue) {
-    _lifeSkillController.selectedLifeSkillLevelName = lifeSkillLevelNameMap[newValue]!;
-    _lifeSkillController.selectedLifeSkillLevel = 1;
-    data['lifeSkillLevel'] =
-        _lifeSkillController.selectedLifeSkillLevelName + _lifeSkillController.selectedLifeSkillLevel;
   }
 }
 

@@ -7,7 +7,7 @@ import 'trade_crate_calculator_widget.dart';
 List<Map<String, String>> toolData = [
   {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
   {'name': '소환서 계산기', 'image': '고유결이미지', 'page': 'Scroll_calculator'},
-  {'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
+  //{'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
 class ToolsWidget extends StatefulWidget {

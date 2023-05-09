@@ -6,7 +6,7 @@ import 'package:bdo_things/constants.dart';
 List<Map<String, String>> SettingMenuData = [
   {'name': '가문', 'image': 'tradeCrate', 'page': 'test1'},
   {'name': '생활', 'image': 'tradeCrate', 'page': 'LifeSkill'},
-  {'name': '예비', 'image': 'tradeCrate', 'page': 'Test2'},
+  //{'name': '예비', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
 class SettingWidget extends StatefulWidget {
@@ -38,20 +38,27 @@ class _SettingWidgetState extends State<SettingWidget> {
   List<Widget> _buildSettingMenuWidgetList(BuildContext context) {
     return _settingMenuData
         .map((data) => SettingMenuItem(
-            data: data, onTap: () => _onSettingMenuItemTap(data)))
+        data: data, onTap: () => _onSettingMenuItemTap(data)))
         .toList();
   }
 
   void _onSettingMenuItemTap(Map<String, String> data) {
     switch (data['page']) {
-      case 'Test1':
+      case 'test1':
         setState(() {
-          _currentWidget = Container(
-            color: Colors.white,
-            width: 560,
-            height: 600,
-            child: Text('test1'),
-          );
+          _currentWidget =
+              SizedBox(
+                height: 600,
+                width: 600,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.close, color: Colors.white, size: 60),
+                    SizedBox(height: 20),
+                    Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+                  ],
+                ),
+              );
         });
         break;
       case 'LifeSkill':
@@ -71,7 +78,19 @@ class _SettingWidgetState extends State<SettingWidget> {
         break;
       default:
         setState(() {
-          _currentWidget = SizedBox();
+          _currentWidget =
+              SizedBox(
+            height: 600,
+            width: 600,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.close, color: Colors.white, size: 60),
+                SizedBox(height: 20),
+                Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+              ],
+            ),
+          );
         });
     }
   }
@@ -118,11 +137,11 @@ class SettingMenuItem extends StatelessWidget {
       width: 50,
       height: 50,
       decoration: BoxDecoration(
-           image: DecorationImage(
-             image: AssetImage('images/icon/Farming.png'),
-             fit: BoxFit.fitWidth,
-           ),
-          ),
+        image: DecorationImage(
+          image: AssetImage('images/icon/Farming.png'),
+          fit: BoxFit.fitWidth,
+        ),
+      ),
     );
   }
 }

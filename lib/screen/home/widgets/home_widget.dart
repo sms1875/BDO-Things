@@ -14,8 +14,30 @@ class HomeWidget extends BaseWidget {
       direction: Axis.vertical,
       spacing: 10.0,
       children: [
-        banner('중앙 배너', 600, 600),
-        banner('중앙 아래 배너', 600, 600),
+        SizedBox(
+          height: 600,
+          width: 600,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.close, color: Colors.white, size: 60),
+              SizedBox(height: 20),
+              Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 600,
+          width: 600,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.close, color: Colors.white, size: 60),
+              SizedBox(height: 20),
+              Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -26,8 +48,18 @@ class HomeWidget extends BaseWidget {
       direction: Axis.vertical,
       spacing: 10.0,
       children: [
-        banner('왼쪽 배너', 400, 300),
-        banner('왼쪽 아래 배너', 300, 300),
+        SizedBox(
+          height: 400,
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.close, color: Colors.white, size: 60),
+              SizedBox(height: 20),
+              Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+            ],
+          ),
+        ),
       ],
     );
   }
@@ -35,20 +67,20 @@ class HomeWidget extends BaseWidget {
   @override
   Widget buildRightWidget() {
     return Wrap(
-        direction: Axis.vertical,
-        spacing: 10.0,
-        children: [
-          SizedBox(
-            height: 200,
-            width: 300,
-            child: CouponTableWidget(),
-          ),
-          EventBannerWidget(),
-          SizedBox(
-            width: 300,
-            child: EventCalendarWidget(),
-          ),
-        ],
-      );
+      direction: Axis.vertical,
+      spacing: 10.0,
+      children: [
+        SizedBox(
+          height: 200,
+          width: 300,
+          child: CouponTableWidget(),
+        ),
+        EventBannerWidget(),
+        SizedBox(
+          width: 300,
+          child: EventCalendarWidget(),
+        ),
+      ],
+    );
   }
 }

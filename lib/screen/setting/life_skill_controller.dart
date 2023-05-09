@@ -1,9 +1,10 @@
+import 'package:bdo_things/constants.dart';
 import 'package:bdo_things/data/life_skill_data.dart';
 
-class LifeSkillController {
-  static final LifeSkillController instance = LifeSkillController._();
+class LifeSkillProvider {
+  static final LifeSkillProvider instance = LifeSkillProvider._();
 
-  LifeSkillController._() {
+  LifeSkillProvider._() {
     _initData();
   }
 
@@ -15,5 +16,11 @@ class LifeSkillController {
     selectedLifeSkillLevelName = 0;
     selectedLifeSkillLevel = 1;
     lifeSkillData = lifeSkillDataList;
+  }
+
+  void updateLifeSkillLevel(Map<String, dynamic> data, String newValue) {
+    selectedLifeSkillLevelName = CONSTANTS.lifeSkillLevelNameMap[newValue]!;
+    selectedLifeSkillLevel = 1;
+    data['lifeSkillLevel'] = selectedLifeSkillLevelName + selectedLifeSkillLevel;
   }
 }
