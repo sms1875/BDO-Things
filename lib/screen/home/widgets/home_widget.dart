@@ -54,9 +54,11 @@ class HomeWidget extends BaseWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.close, color: Colors.white, size: 60),
-              SizedBox(height: 20),
-              Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
+              SizedBox(
+                height: 200,
+                width: 300,
+                child: CouponTableWidget(),
+              ),
             ],
           ),
         ),
@@ -70,11 +72,6 @@ class HomeWidget extends BaseWidget {
       direction: Axis.vertical,
       spacing: 10.0,
       children: [
-        SizedBox(
-          height: 200,
-          width: 300,
-          child: CouponTableWidget(),
-        ),
         EventBannerWidget(),
         SizedBox(
           width: 300,
