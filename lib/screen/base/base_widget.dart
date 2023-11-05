@@ -18,7 +18,7 @@ abstract class BaseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDesktop = (MediaQuery.of(context).size.width >= 1200);
+    final bool isDesktop = (MediaQuery.of(context).size.width >= 800);
 
     Widget leftWidget = buildLeftWidget();
     Widget centerWidget = buildCenterWidget();

@@ -15,20 +15,8 @@ class HomeWidget extends BaseWidget {
       spacing: 10.0,
       children: [
         SizedBox(
-          height: 600,
-          width: 600,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(Icons.close, color: Colors.white, size: 60),
-              SizedBox(height: 20),
-              Text("구현 예정입니다", style: TextStyle(color: Colors.white, fontSize: 20)),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 600,
-          width: 600,
+          height: 800,
+          width: 800,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -50,7 +38,7 @@ class HomeWidget extends BaseWidget {
       children: [
         SizedBox(
           height: 400,
-          width: 300,
+          width: 400,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -74,7 +62,7 @@ class HomeWidget extends BaseWidget {
       children: [
         EventBannerWidget(),
         SizedBox(
-          width: 300,
+          width: 400,
           child: EventCalendarWidget(),
         ),
       ],

@@ -25,16 +25,17 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
           final List<Event> eventDataList = provider.events;
           return Container(
               color: CONSTANTS.WIDGET_BACKGROUND_COLOR,
-              width: 300,
+              width: 400,
               padding: EdgeInsets.all(10),
               child: Column(
                 children: [
-                  Text('Events', style: TextStyle(fontSize: 20)),
+                  Text('Events', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                  // 이벤트 슬라이드
                   CarouselSlider(
-                    items: eventDataList.map((eventData) => EventSlideWidget( eventData)).toList(),
+                    items: eventDataList.map((eventData) => eventSlideWidget(eventData)).toList(),
                     carouselController: _carouselController,
                     options: CarouselOptions(
-                      height: 250,
+                      height: 300,
                       initialPage: 0,
                       viewportFraction: 1,
                       autoPlay: true,
@@ -48,11 +49,12 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
                       },
                     ),
                   ),
+                  // 이벤트 슬라이드 인덱스
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                       eventDataList.length,
-                          (index) => SlideNum( // use the slidenum widget here
+                          (index) => slideNumWidget(
                          index,
                          selectedSlideIndex,
                       ),
@@ -61,45 +63,39 @@ class _EventBannerWidgetState extends State<EventBannerWidget> {
                 ],
               )
           );
-        }
-    );
+        });
   }
 
-  Widget EventSlideWidget (Event eventData) {
+  Widget eventSlideWidget (Event eventData) {
     return GestureDetector(
       onTap: () => launchUrl(eventData),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 300,
-              height: 150,
-              child: Image.network(
-                eventData.image,
-                fit: BoxFit.contain,
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 400,
+            height: 225,
+            child: Image.network(
+              eventData.image,
+              fit: BoxFit.contain,
             ),
-            const SizedBox(height: 10),
-            Text(
-              eventData.title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-              overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 10),
+          Text(
+            eventData.title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
-          ],
-        ),
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }
 
-  Widget SlideNum(int index, int selectedIndex) {
+  Widget slideNumWidget(int index, int selectedIndex) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 2),
       width: index == selectedIndex ? 12 : 6,
