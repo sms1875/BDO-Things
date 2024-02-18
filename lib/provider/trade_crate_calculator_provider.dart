@@ -85,11 +85,13 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
         final material = materials[i];
         materialsTotalPrice += (material.marketPrice * material.materialQuantity);
       }
+      int  saleprice= _calculateSellingPrice(design.productSellPrice);
       return {
         'id': design.designId,
         'name': design.productName + " * " + design.productQuantity.toString(),
-        'sale_price': _calculateSellingPrice(design.productSellPrice),
-        'profit': _calculateSellingPrice(design.productSellPrice) - materialsTotalPrice,
+        'sale_price':saleprice,
+        'profit': saleprice - materialsTotalPrice,
+        'profit_per': (saleprice - materialsTotalPrice)/design.productQuantity,
         'materialsTotalPrice':materialsTotalPrice,
         'Design ID': design.designId,
         'Product ID': design.productId,
@@ -114,6 +116,7 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
       final originalPrice =  data['Product Sell Price'];
       data['sale_price'] = _calculateSellingPrice(originalPrice) * data['Product Quantity'];
       data['profit'] = data['sale_price'] - data['materialsTotalPrice'];
+      data['profit_per'] =  data['profit'] / data['Product Quantity'];
     }
     sortTableData();
   }

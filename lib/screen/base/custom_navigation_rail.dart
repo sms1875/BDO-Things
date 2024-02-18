@@ -61,10 +61,11 @@ List<Map<String, dynamic>> pageList = [
     'name': 'Home',
     'icon': Icons.home,
   },
+  /*
   {
     'name': 'Tools',
     'icon': Icons.pan_tool,
-  },
+  },*/
   {
     'name': 'Setting',
     'icon': Icons.settings,

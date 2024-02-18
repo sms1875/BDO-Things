@@ -2,6 +2,8 @@ import 'package:bdo_things/screen/base/base_page.dart';
 import 'package:bdo_things/screen/home/widgets/home_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../tools/widgets/tools_widget.dart';
+
 
 
 class HomePage extends StatelessWidget {
@@ -13,8 +15,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BasePage(
       pageTitle: HomePage.pageTitle,
-      body: HomeWidget(),
-
+      body: ToolsWidget()//HomeWidget(),
     );
   }
 }

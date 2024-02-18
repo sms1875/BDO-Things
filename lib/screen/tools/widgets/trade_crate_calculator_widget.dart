@@ -103,6 +103,9 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
           ),
           onSort: (columnIndex, ascending) => onSort(),
         ),
+        DataColumn(
+          label: Text('1개당 수익'),
+        ),
       ],
       rows: data.map(_buildDataRow).toList(),
     );
@@ -135,6 +138,9 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
         ),
         DataCell(
           Text(data['profit'].toString()),
+        ),
+        DataCell(
+          Text(data['profit_per'].toString()),
         ),
       ],
     );

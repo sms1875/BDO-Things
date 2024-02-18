@@ -32,10 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.language),
           items: <String>[
             '한국',
-            '미국',
-            '유럽',
-            '러시아',
-            '일본',
+            //'미국','유럽','러시아','일본',
           ].map((String value) {
             return DropdownMenuItem<String>(
               value: value,
