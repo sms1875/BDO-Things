@@ -1,6 +1,5 @@
 import 'package:bdo_things/constants.dart';
 import 'package:bdo_things/repository/design_repository.dart';
-import 'package:bdo_things/repository/get_world_market_search_list_repository.dart';
 import 'package:bdo_things/data/life_skill_data.dart';
 import 'package:bdo_things/data/design.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +13,6 @@ enum TradeCrateSortStatus {
 
 class TradeCrateCalculatorProvider extends ChangeNotifier {
   final DesignRepository _designRepository= DesignRepository();
-  final GetWorldMarketSearchListRepository _getWorldMarketSearchListRepository = GetWorldMarketSearchListRepository();
 
   List<Design>  _designs = [];
   List<Design> get designs => _designs;
