@@ -1,5 +1,3 @@
-import 'package:bdo_things/provider/coupon_provider.dart';
-import 'package:bdo_things/provider/event_provider.dart';
 import 'package:bdo_things/provider/trade_crate_calculator_provider.dart';
 import 'package:bdo_things/common_route_observer.dart';
 import 'package:bdo_things/screen/home/home_page.dart';
@@ -10,8 +8,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
 /*
-  await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform
+  await Firebase.initializeApp(      options: DefaultFirebaseOptions.currentPlatform
   );
 */
   runApp(const MyApp());
@@ -27,13 +24,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (_) => CouponProvider()
-        ),
-        ChangeNotifierProvider(
             create: (_) => TradeCrateCalculatorProvider()
-        ),
-        ChangeNotifierProvider(
-            create: (_) => EventProvider()
         ),
       ],
       child: MaterialApp(
