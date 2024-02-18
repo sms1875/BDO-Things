@@ -23,10 +23,9 @@ class MarketWaitListWidget extends StatelessWidget {
 
   Future<List<Map<String, dynamic>>> fetchMarketWaitList() async {
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/marketWaitList'));
+      final response = await http.get(Uri.parse('http://localhost:3000/getMarketWaitList'));
       if (response.statusCode == 200) {
         List<Map<String, dynamic>> data = jsonDecode(response.body)['data'];
-        print('Market wait list data: $data'); // Print the fetched data
         return data;
       } else {
         print('Failed to load market wait list: ${response.statusCode}');

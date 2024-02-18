@@ -82,36 +82,39 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
     setLoading(true);
     _tradeCrateData = await Future.wait(designs.map((design) async {
       final materials = design.materials;
-      final materialItemIdString = materials.map((material) => material.materialItemId.toString()).join(',');
-
-      final marketPrice = await _getWorldMarketSearchListRepository.getWorldMarketSearchLists(materialItemIdString);
-      final marketPriceList = marketPrice.parseResultMsg().split('|');
-
       int materialsTotalPrice = 0;
       for (int i = 0; i < materials.length; i++) {
         final material = materials[i];
-        materialsTotalPrice += (int.parse(marketPriceList[i].split('-')[2]) * material.amount).toInt();
+        materialsTotalPrice += (material.marketPrice * material.materialQuantity);
       }
-
       return {
-        'id': design.id,
-        'name': design.name,
-        'materialsTotalPrice': materialsTotalPrice,
-        'sale_price': _calculateSellingPrice(design.originalPrice),
-        'profit': _calculateSellingPrice(design.originalPrice) - materialsTotalPrice,
+        'id': design.designId,
+        'name': design.productName + " * " + design.productQuantity.toString(),
+        'sale_price': _calculateSellingPrice(design.productSellPrice),
+        'profit': _calculateSellingPrice(design.productSellPrice) - materialsTotalPrice,
+        'materialsTotalPrice':materialsTotalPrice,
+        'Design ID': design.designId,
+        'Product ID': design.productId,
+        'Product Sell Price': design.productSellPrice,
+        'Product Name': design.productName,
+        'Product Quantity': design.productQuantity,
+        'materials': materials.map((material) => {
+          'Material ID': material.materialId,
+          'Material Quantity': material.materialQuantity,
+          'Market Price': material.marketPrice,
+          'Material Name': material.materialName,
+        }).toList(),
       };
     }));
-
     sortTableData();
     setLoading(false);
-
     notifyListeners();
   }
 
   void calculateSellingPriceAndProfit() {
     for (final data in _tradeCrateData) {
-      final originalPrice = designs.firstWhere((element) => element.id == data['id']).originalPrice;
-      data['sale_price'] = _calculateSellingPrice(originalPrice);
+      final originalPrice =  data['Product Sell Price'];
+      data['sale_price'] = _calculateSellingPrice(originalPrice) * data['Product Quantity'];
       data['profit'] = data['sale_price'] - data['materialsTotalPrice'];
     }
     sortTableData();

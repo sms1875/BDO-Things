@@ -1,52 +1,53 @@
 class Design {
-  final int id;
-  final String name;
-  final int originalPrice;
-  final List<dynamic> materials;
+  final int designId; // Renamed 'id' to 'designId'
+  final int productId;
+  final int productSellPrice;
+  final String productName;
+  final int productQuantity;
+  final List<MaterialItem> materials; // Changed type from List<dynamic> to List<MaterialItem>
 
   Design({
-    required this.id,
-    required this.name,
-    required this.originalPrice,
+    required this.designId, // Renamed 'id' to 'designId'
+    required this.productId,
+    required this.productSellPrice,
+    required this.productName,
+    required this.productQuantity,
     required this.materials,
   });
 
   factory Design.fromMap(Map<String, dynamic> map) {
     return Design(
-      id: map['id'] as int,
-      name: map['name'] as String,
-      originalPrice: map['price'] as int,
+      designId: map['Design ID'] as int, // Changed key from 'id' to 'Design ID'
+      productId: map['Product ID'] as int,
+      productSellPrice: map['Product Sell Price'] as int,
+      productName: map['Product Name'] as String,
+      productQuantity: map['Product Quantity'] as int,
       materials: (map['materials'] as List<dynamic>)
           .map((material) => MaterialItem.fromMap(material as Map<String, dynamic>))
           .toList(),
-      /*
-      id: map['id']['stringValue'],
-      name: map['name']['stringValue'],
-      originalPrice: int.parse(map['original_price']['integerValue']),
-      materials: map['materials']['arrayValue']['values']
-          .map((material) => material['mapValue']['fields'])
-          .map((material) => MaterialItem(
-        materialItemId: material['materials_id']['stringValue'],
-        amount: int.parse(material['amount']['integerValue']),
-      )).toList(),
-      */
     );
   }
 }
 
 class MaterialItem {
-  final int materialItemId;
-  final int amount;
+  final int materialId;
+  final int materialQuantity;
+  final int marketPrice;
+  final String materialName;
 
   MaterialItem({
-    required this.materialItemId,
-    required this.amount,
+    required this.materialId,
+    required this.materialQuantity,
+    required this.marketPrice,
+    required this.materialName,
   });
 
   factory MaterialItem.fromMap(Map<String, dynamic> map) {
     return MaterialItem(
-      materialItemId: map['id'] as int,
-      amount: map['count'] as int,
+      materialId: map['Material ID'] as int,
+      materialQuantity: map['Material Quantity'] as int,
+      marketPrice: map['Market Price'] as int,
+      materialName: map['Material Name'] as String,
     );
   }
 }
