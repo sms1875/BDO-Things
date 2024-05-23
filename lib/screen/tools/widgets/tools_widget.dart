@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bdo_things/constants.dart';
 import 'market_waitlist_widget.dart';
-import 'trade_crate_calculator_widget.dart';
+import 'crate_calculate_widget.dart';
 
 List<Map<String, String>> toolData = [
   {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
@@ -47,7 +47,7 @@ class _ToolsWidgetState extends State<ToolsWidget> {
     switch (data['page']) {
       case 'Trade_crate':
         setState(() {
-          _currentWidget = TradeCrateCalculatorWidget();
+          _currentWidget = CrateCalculateWidget();
         });
         break;
       case 'Scroll_calculator':
