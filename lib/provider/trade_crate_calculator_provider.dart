@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:bdo_things/constants.dart';
 import 'package:bdo_things/repository/design_repository.dart';
-import 'package:bdo_things/types/life_skill_data.dart';
 import 'package:bdo_things/types/bdolyticsDTO.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -150,7 +149,7 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   int _calculateSellingPrice(int originalPrice) {
     const double defaultBonus = 0.05;
     const double tradeLevelBounusMultiplier = 0.005;
-    double tradeLevelBounus = defaultBonus + lifeSkillDataList.firstWhere((data) => data['name'] == 'Trading')['lifeSkillLevel'] * tradeLevelBounusMultiplier;
+    double tradeLevelBounus = defaultBonus + 40/*가공무역 레벨*/ * tradeLevelBounusMultiplier;
     num distanceBonus = CONSTANTS.distanceBonus[_originRoute]?[_destinationRoute] ?? 0;
     int sellingPrice = ((originalPrice) * ((1+distanceBonus)*(1+tradeLevelBounus))).toInt();
     return sellingPrice;

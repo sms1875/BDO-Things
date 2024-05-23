@@ -1,4 +1,3 @@
-import 'package:bdo_things/screen/tools/widgets/scroll_calculator_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/constants.dart';
@@ -8,8 +7,6 @@ import 'trade_crate_calculator_widget.dart';
 List<Map<String, String>> toolData = [
   {'name': '가공무역 계산기', 'image': 'tradeCrate', 'page': 'Trade_crate'},
   {'name': '거래소 등록대기 상품', 'image': '고유결이미지', 'page': 'Scroll_calculator'},
-  //{'name': '소환서 계산기', 'image': '고유결이미지', 'page': 'Scroll_calculator'},
-  //{'name': '예비2', 'image': 'tradeCrate', 'page': 'Test2'},
 ];
 
 class ToolsWidget extends StatefulWidget {
