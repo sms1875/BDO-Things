@@ -112,7 +112,6 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
   }
 
   DataRow _buildDataRow(data) {
-    print(data);
     return DataRow(
       cells: [
         DataCell(

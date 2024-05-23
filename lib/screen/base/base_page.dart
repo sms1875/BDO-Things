@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:bdo_things/constants.dart';
 import 'custom_app_bar.dart';
-import 'custom_navigation_rail.dart';
 
 class BasePage extends StatefulWidget {
   final String pageTitle;
@@ -19,7 +18,6 @@ class BasePageState extends State<BasePage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDesktop = (MediaQuery.of(context).size.width >= 1200);
 
     return Scaffold(
       backgroundColor: CONSTANTS.BACKGROUNDCOLOR,
@@ -28,7 +26,6 @@ class BasePageState extends State<BasePage> {
         builder: (BuildContext context, BoxConstraints constraints) {
           return Row(
             children: <Widget>[
-              isDesktop ? const CustomNavigationRail():SizedBox()  ,
               const VerticalDivider(thickness: 1, width: 1),
               Expanded(
                   child:ListView(
