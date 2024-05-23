@@ -1,5 +1,5 @@
 import 'package:bdo_things/constants.dart';
-import 'package:bdo_things/data/life_skill_data.dart';
+import 'package:bdo_things/types/life_skill_data.dart';
 
 class LifeSkillProvider {
   static final LifeSkillProvider instance = LifeSkillProvider._();

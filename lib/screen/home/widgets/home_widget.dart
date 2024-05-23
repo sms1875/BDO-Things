@@ -1,5 +1,4 @@
 import 'package:bdo_things/screen/base/base_widget.dart';
-import 'package:bdo_things/screen/home/widgets/market_waitlist_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidget extends BaseWidget {
@@ -17,7 +16,6 @@ class HomeWidget extends BaseWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              MarketWaitListWidget(),
             ],
           ),
         ),

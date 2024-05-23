@@ -119,12 +119,14 @@ class _TradeCrateCalculatorWidgetState extends State<TradeCrateCalculatorWidget>
           Container(
             width: 40,
             height: 40,
+            /*
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('images/icon/design_crate/${data['id']}.webp'),
                 fit: BoxFit.fitWidth,
               ),
             ),
+            */
           ),
         ),
         DataCell(

@@ -1,7 +1,9 @@
+import 'dart:developer';
+
 import 'package:bdo_things/constants.dart';
 import 'package:bdo_things/repository/design_repository.dart';
-import 'package:bdo_things/data/life_skill_data.dart';
-import 'package:bdo_things/data/design.dart';
+import 'package:bdo_things/types/life_skill_data.dart';
+import 'package:bdo_things/types/bdolyticsDTO.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -79,30 +81,30 @@ class TradeCrateCalculatorProvider extends ChangeNotifier {
   Future<void> loadTableData() async {
     setLoading(true);
     _tradeCrateData = await Future.wait(designs.map((design) async {
-      final materials = design.materials;
+      final materials = design.ingredients;
       int materialsTotalPrice = 0;
       for (int i = 0; i < materials.length; i++) {
         final material = materials[i];
-        materialsTotalPrice += (material.marketPrice * material.materialQuantity);
+        materialsTotalPrice += (material.amount) as int;
       }
-      int  saleprice= _calculateSellingPrice(design.productSellPrice);
+      int  saleprice= _calculateSellingPrice(design.id);
       return {
-        'id': design.designId,
-        'name': design.productName + " * " + design.productQuantity.toString(),
+        'id': design.id,
+        'name': design.name,
         'sale_price':saleprice,
         'profit': saleprice - materialsTotalPrice,
-        'profit_per': (saleprice - materialsTotalPrice)/design.productQuantity,
+        'profit_per': (saleprice - materialsTotalPrice)/design.id,
         'materialsTotalPrice':materialsTotalPrice,
-        'Design ID': design.designId,
-        'Product ID': design.productId,
-        'Product Sell Price': design.productSellPrice,
-        'Product Name': design.productName,
-        'Product Quantity': design.productQuantity,
+        'Design ID': design.id,
+        'Product ID': design.id,
+        'Product Sell Price': design.id,
+        'Product Name': design.id,
+        'Product Quantity': design.id,
         'materials': materials.map((material) => {
-          'Material ID': material.materialId,
-          'Material Quantity': material.materialQuantity,
-          'Market Price': material.marketPrice,
-          'Material Name': material.materialName,
+          'Material ID': material.id,
+          'Material Quantity': material.id,
+          'Market Price': material.id,
+          'Material Name': material.id,
         }).toList(),
       };
     }));

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CONSTANTS {
-  static const String FIRESTORE_URL = 'https://firestore.googleapis.com/v1/projects/bdothings/databases/(default)/documents';
   static const String MARKET_URL = 'https://trade.kr.playblackdesert.com/Trademarket';
 
   static const BACKGROUNDCOLOR = Color.fromRGBO(40, 40, 40, 1);

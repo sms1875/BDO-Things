@@ -2,7 +2,7 @@ import 'package:bdo_things/screen/tools/widgets/scroll_calculator_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bdo_things/constants.dart';
-import '../../home/widgets/market_waitlist_widget.dart';
+import 'market_waitlist_widget.dart';
 import 'trade_crate_calculator_widget.dart';
 
 List<Map<String, String>> toolData = [
