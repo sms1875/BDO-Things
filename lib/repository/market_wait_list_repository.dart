@@ -11,9 +11,9 @@ class MarketWaitListRepository {
       final response = await _dio.get('${Config.apiUrl}/getMarketWaitList');
 
       if (response.statusCode == 200) {
-        final List<dynamic> decodedData = jsonDecode(response.data);
-        final marketWaitList =
-            decodedData.map((json) => WaitListItemDTO.fromJson(json)).toList();
+        final marketWaitList = (response.data as List)
+            .map((json) => WaitListItemDTO.fromJson(json))
+            .toList();
         return marketWaitList;
       } else {
         throw Exception(
