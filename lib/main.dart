@@ -1,34 +1,29 @@
-import 'package:bdo_things/provider/design_calculate_provider.dart';
-import 'package:bdo_things/common_route_observer.dart';
-import 'package:bdo_things/screen/home/home_page.dart';
+import 'package:bdo_things/provider/crate_design_provider.dart';
+import 'package:bdo_things/provider/life_skill_level_provider.dart';
+import 'package:bdo_things/provider/trade_routes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'router.dart';
 
-void main() async {
+void main() {
   runApp(const MyApp());
 }
 
-final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (_) => DesignCalculateProvider()
-        ),
+        ChangeNotifierProvider(create: (_) => TradeRoutesProvider()),
+        ChangeNotifierProvider(create: (_) => CrateDesignProvider()),
+        ChangeNotifierProvider(create: (_) => LifeSkillLevelProvider()),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
+        routerConfig: router,
         debugShowCheckedModeBanner: false,
-        navigatorObservers: [CommonRouteObserver()],
-        initialRoute: 'Home',
-        routes: {
-          '/': (_) => const HomePage(),
-          'Home': (_) => const HomePage(),
-          }),
+      ),
     );
   }
 }
