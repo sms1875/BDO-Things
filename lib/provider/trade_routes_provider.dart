@@ -19,7 +19,7 @@ class TradeRoutesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double getTravelCost() {
+  double getDistanceBonus() {
     int originIndex = CONSTANTS.routes.indexOf(_origin);
     int destinationIndex = CONSTANTS.routes.indexOf(_destination);
 

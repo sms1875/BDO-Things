@@ -51,6 +51,9 @@ class CrateDesignProvider with ChangeNotifier {
         await getImage(design.iconImage);
       }
 
+      // 기본 정렬 : lifeSkillLevelProvider.selectedLevel, tradeRoutesProvider.getDistanceBonus() 초기값
+      sortByProfit(false, 60, 2.13);
+
     } catch (e) {
       _error = e;
       print(_error);

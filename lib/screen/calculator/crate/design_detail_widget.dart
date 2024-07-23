@@ -46,7 +46,7 @@ class _CrateDetailPageState extends State<DesignDetailWidget> {
             .firstWhere((design) => design.id == widget.designId);
         final lifeSkillBonus = crateDesignProvider
             .calculateLifeSkillBonus(lifeSkillLevelProvider.selectedLevel);
-        final distanceBonus = tradeRoutesProvider.getTravelCost();
+        final distanceBonus = tradeRoutesProvider.getDistanceBonus();
         final baseSellingPrice =
             crateDesignProvider.calculateSellingPrice(design, 1.0, 1.0);
         final bonusSellingPrice = crateDesignProvider.calculateSellingPrice(

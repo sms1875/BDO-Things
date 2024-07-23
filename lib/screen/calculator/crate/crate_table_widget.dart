@@ -16,7 +16,6 @@ class CrateTableWidget extends StatefulWidget {
 class _CrateTableWidgetState extends State<CrateTableWidget> {
   bool _isSortedAscending = false;
   int _sortColumnIndex = 4;
-  bool _needsSorting = true;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +25,6 @@ class _CrateTableWidgetState extends State<CrateTableWidget> {
           lifeSkillLevelProvider, child) {
         if (crateDesignProvider.isLoading) {
           return Center(child: CircularProgressIndicator());
-        }
-        // Schedule sorting to run after the current frame
-        if (_needsSorting) {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            crateDesignProvider.sortByProfit(
-                _isSortedAscending,
-                lifeSkillLevelProvider.selectedLevel,
-                tradeRoutesProvider.getTravelCost());
-          });
-          _needsSorting = false;
         }
 
         return Column(
@@ -68,7 +57,7 @@ class _CrateTableWidgetState extends State<CrateTableWidget> {
                         crateDesignProvider.sortByProfit(
                             ascending,
                             lifeSkillLevelProvider.selectedLevel,
-                            tradeRoutesProvider.getTravelCost());
+                            tradeRoutesProvider.getDistanceBonus());
                       });
                     },
                   ),
@@ -94,7 +83,7 @@ class _CrateTableWidgetState extends State<CrateTableWidget> {
                                     design,
                                     crateDesignProvider.calculateLifeSkillBonus(
                                         lifeSkillLevelProvider.selectedLevel),
-                                    tradeRoutesProvider.getTravelCost())
+                                    tradeRoutesProvider.getDistanceBonus())
                                 .toString())),
                             DataCell(
                               Text(
@@ -105,7 +94,7 @@ class _CrateTableWidgetState extends State<CrateTableWidget> {
                                             .calculateLifeSkillBonus(
                                                 lifeSkillLevelProvider
                                                     .selectedLevel),
-                                        tradeRoutesProvider.getTravelCost())
+                                        tradeRoutesProvider.getDistanceBonus())
                                     .toString(),
                                 style: TextStyle(
                                   color: crateDesignProvider.getProfit(
@@ -115,7 +104,7 @@ class _CrateTableWidgetState extends State<CrateTableWidget> {
                                                       lifeSkillLevelProvider
                                                           .selectedLevel),
                                               tradeRoutesProvider
-                                                  .getTravelCost()) >=
+                                                  .getDistanceBonus()) >=
                                           0
                                       ? Colors.green
                                       : Colors.red,
